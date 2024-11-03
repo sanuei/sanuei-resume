@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <!-- 基本元数据 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub - Sanuei</title>
+    
+    <!-- 样式表引入 -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/github.css">
+    <!-- Font Awesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- 导航栏 -->
     <nav class="navbar">
+        <!-- 网站品牌/Logo -->
         <div class="nav-brand">
             <a href="index.html">Sanuei</a>
         </div>
+        <!-- 移动端菜单按钮 -->
         <div class="nav-toggle" id="navToggle">
             <i class="fas fa-bars"></i>
         </div>
+        <!-- 导航链接 -->
         <ul class="nav-links">
             <li><a href="index.html">首页</a></li>
             <li><a href="resume.html">简历</a></li>
@@ -24,27 +32,35 @@
         </ul>
     </nav>
 
+    <!-- 主要内容区域 -->
     <main class="github-container">
+        <!-- GitHub个人资料部分 -->
         <section class="github-header">
+            <!-- 个人资料卡片 - 由JavaScript动态填充 -->
             <div class="github-profile" id="profile">
+                <!-- 加载动画 -->
                 <div class="profile-loading">
                     <i class="fas fa-spinner fa-spin"></i>
                 </div>
             </div>
         </section>
 
+        <!-- GitHub统计信息 -->
         <section class="github-stats">
             <div class="stats-grid">
+                <!-- 仓库数量卡片 -->
                 <div class="stat-card">
                     <i class="fas fa-code-branch"></i>
                     <h3>仓库数量</h3>
                     <p id="repoCount">-</p>
                 </div>
+                <!-- 获得星标数卡片 -->
                 <div class="stat-card">
                     <i class="fas fa-star"></i>
                     <h3>获得星标</h3>
                     <p id="totalStars">-</p>
                 </div>
+                <!-- 主要编程语言卡片 -->
                 <div class="stat-card">
                     <i class="fas fa-code"></i>
                     <h3>主要语言</h3>
@@ -53,9 +69,12 @@
             </div>
         </section>
 
+        <!-- 仓库展示区域 -->
         <section class="repositories">
             <h2>热门仓库</h2>
+            <!-- 仓库网格 - 由JavaScript动态填充 -->
             <div class="repo-grid" id="repoGrid">
+                <!-- 加载动画 -->
                 <div class="loading">
                     <i class="fas fa-spinner fa-spin"></i>
                     <p>加载中...</p>
@@ -64,16 +83,21 @@
         </section>
     </main>
 
+    <!-- 页脚区域 -->
     <footer>
+        <!-- 社交媒体链接 -->
         <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/sanuei" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
+        <!-- 版权信息 -->
         <p>&copy; 2024 Sanuei. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript 文件引入 -->
     <script src="js/main.js"></script>
+    <!-- GitHub API 集成脚本 -->
     <script src="js/github.js"></script>
 </body>
 </html> 

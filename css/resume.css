@@ -1,9 +1,11 @@
+/* 简历页面容器样式 */
 .resume-container {
     max-width: 1200px;
-    margin: 80px auto 40px;
+    margin: 80px auto 40px; /* 顶部留出导航栏空间 */
     padding: 20px;
 }
 
+/* 简历页面头部样式 */
 .resume-header {
     display: flex;
     justify-content: space-between;
@@ -11,95 +13,152 @@
     margin-bottom: 40px;
 }
 
+/* 简历标题样式 */
 .resume-header h1 {
     font-size: 2.5rem;
     color: var(--primary-color);
 }
 
+/* 简历内容区块样式 */
 .resume-section {
     background-color: var(--secondary-color);
     border-radius: 8px;
     padding: 25px;
     margin-bottom: 30px;
+    transition: transform 0.3s ease; /* 添加悬停动画 */
 }
 
+/* 区块标题样式 */
 .resume-section h2 {
     color: var(--primary-color);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* 图标和文字间距 */
 }
 
+/* 个人信息网格布局 */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
+/* 信息项样式 */
 .info-item {
     padding: 10px;
-    background-color: rgba(108, 99, 255, 0.1);
+    background-color: rgba(108, 99, 255, 0.1); /* 半透明背景 */
     border-radius: 4px;
 }
 
+/* 技能网格布局 */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
+/* 技能类别样式 */
 .skill-category h3 {
     color: var(--accent-color);
     margin-bottom: 15px;
 }
 
+/* 技能标签容器 */
 .skill-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
+/* 技能标签样式 */
 .skill-tag {
     background-color: rgba(108, 99, 255, 0.2);
     color: var(--primary-color);
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 0.9rem;
+    transition: transform 0.2s ease; /* 添加悬停动画 */
 }
 
+/* 技能标签悬停效果 */
+.skill-tag:hover {
+    transform: translateY(-2px);
+}
+
+/* 工作经历和教育经历项样式 */
 .experience-item, .education-item {
     margin-bottom: 25px;
 }
 
+/* 经历标题样式 */
 .experience-item h3, .education-item h3 {
     color: var(--accent-color);
     margin-bottom: 5px;
 }
 
+/* 公司/学校信息样式 */
 .company, .school {
     color: var(--primary-color);
     font-size: 0.9rem;
     margin-bottom: 10px;
 }
 
+/* 经历详情列表样式 */
 .experience-details {
     list-style-position: inside;
     padding-left: 20px;
 }
 
+/* 经历详情项样式 */
 .experience-details li {
     margin-bottom: 5px;
+    line-height: 1.6;
 }
 
+/* 下载按钮容器样式 */
+.download-btn {
+    margin-left: 20px;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
+    /* 移动端头部布局 */
     .resume-header {
         flex-direction: column;
         gap: 20px;
         text-align: center;
     }
 
+    /* 移动端下载按钮 */
+    .download-btn {
+        margin-left: 0;
+    }
+
+    /* 移动端信息网格 */
     .info-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* 移动端技能网格 */
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 打印样式优化 */
+@media print {
+    .resume-container {
+        margin: 0;
+        padding: 20px;
+    }
+
+    .navbar, .footer, .download-btn {
+        display: none; /* 打印时隐藏不必要的元素 */
+    }
+
+    .resume-section {
+        break-inside: avoid; /* 避免在打印时分页 */
+        page-break-inside: avoid;
     }
 } 

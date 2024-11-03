@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <!-- 基本元数据 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>程序员个人网站</title>
+    
+    <!-- 样式表引入 -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- 导航栏 -->
     <nav class="navbar">
+        <!-- 网站品牌/Logo -->
         <div class="nav-brand">
             <a href="index.html">Sanuei</a>
         </div>
+        <!-- 移动端菜单按钮 -->
         <div class="nav-toggle" id="navToggle">
             <i class="fas fa-bars"></i>
         </div>
+        <!-- 导航链接 -->
         <ul class="nav-links">
             <li><a href="index.html">首页</a></li>
             <li><a href="resume.html">简历</a></li>
@@ -23,10 +31,13 @@
         </ul>
     </nav>
 
+    <!-- 主要内容区域 - 英雄区块 -->
     <main class="hero">
         <div class="hero-content">
+            <!-- 个人介绍 -->
             <h1>你好，我是 <span class="highlight">Sanuei</span></h1>
             <p>全栈开发工程师 | 开源爱好者</p>
+            <!-- 行动按钮 -->
             <div class="cta-buttons">
                 <a href="projects.html" class="btn primary">查看作品</a>
                 <a href="resume.html" class="btn secondary">我的简历</a>
@@ -34,15 +45,19 @@
         </div>
     </main>
 
+    <!-- 页脚区域 -->
     <footer>
+        <!-- 社交媒体链接 -->
         <div class="social-links">
-            <a href="https://github.com/Sanuei" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/Sanuei" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
             <a href="#"><i class="fab fa-linkedin"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
+        <!-- 版权信息 -->
         <p>&copy; 2024 Sanuei. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript 文件引入 -->
     <script src="js/main.js"></script>
 </body>
 </html> 
