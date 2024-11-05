@@ -73,8 +73,8 @@ class GitHubUI {
                 <img src="${profile.avatar_url}" alt="${profile.name}">
             </div>
             <div class="profile-info">
-                <h1>${profile.name}</h1>
-                <p>${profile.login}</p>
+                <h1>${profile.login}</h1>
+                <p>エンジニア</p>
                 <p class="profile-bio">${profile.bio || ''}</p>
             </div>
         `;
