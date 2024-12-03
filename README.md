@@ -2,10 +2,9 @@
 
 这是一个现代化的个人作品集网站，采用响应式设计，展示个人项目和技能。
 
-# 网站预览
+## 网站预览
 
-https://sanuei.github.io/sanuei-resume/
-
+[Sanuei个人网站](https://sanuei.github.io/sanuei-resume/)
 
 ## 功能特点
 
@@ -25,34 +24,41 @@ https://sanuei.github.io/sanuei-resume/
 - GitHub REST API
 
 ## 项目结构
+
+```
 personal-portfolio/
-├── index.html # 主页
-├── resume.html # 简历页面
-├── projects.html # 项目展示页面
-├── github.html # GitHub集成页面
+├── index.html          # 主页
+├── resume.html         # 简历页面
+├── projects.html       # 项目展示页面
+├── github.html         # GitHub集成页面
 ├── css/
-│ ├── style.css # 全局样式
-│ ├── resume.css # 简历页面样式
-│ ├── projects.css # 项目页面样式
-│ └── github.css # GitHub页面样式
+│   ├── style.css       # 全局样式
+│   ├── resume.css      # 简历页面样式
+│   ├── projects.css    # 项目页面样式
+│   └── github.css      # GitHub页面样式
 ├── js/
-│ ├── main.js # 主要JavaScript功能
-│ ├── projects.js # 项目过滤功能
-│ └── github.js # GitHub API集成
-└── README.md # 项目文档
+│   ├── main.js         # 主要JavaScript功能
+│   ├── projects.js     # 项目过滤功能
+│   ├── github.js       # GitHub API集成
+│   └── i18n.js         # 多语言支持
+└── README.md           # 项目文档
+```
 
 ## 安装和运行
 
 1. 克隆仓库：
-   
-bash
-git clone https://github.com/yourusername/personal-portfolio.git
 
-3. 进入项目目录：
-bash
-cd personal-portfolio
+   ```bash
+   git clone https://github.com/yourusername/personal-portfolio.git
+   ```
 
-4. 使用本地服务器运行项目（任选其一）：
+2. 进入项目目录：
+
+   ```bash
+   cd personal-portfolio
+   ```
+
+3. 使用本地服务器运行项目（任选其一）：
    - 使用 VS Code Live Server 扩展
    - 使用 Python 简单服务器：
      ```bash
@@ -63,23 +69,23 @@ cd personal-portfolio
      npx http-server
      ```
 
-5. 在浏览器中访问：
+4. 在浏览器中访问：
    - http://localhost:8000 (Python)
    - http://localhost:8080 (http-server)
 
 ## 自定义配置
 
 1. 修改个人信息：
-   - 更新 index.html 中的名字和标题
-   - 在 resume.html 中更新简历内容
-   - 在 js/github.js 中更改 GitHub 用户名
+   - 更新 `index.html` 中的名字和标题
+   - 在 `resume.html` 中更新简历内容
+   - 在 `js/github.js` 中更改 GitHub 用户名
 
 2. 更新项目展示：
-   - 在 projects.html 中添加或修改项目卡片
+   - 在 `projects.html` 中添加或修改项目卡片
    - 自定义项目分类和标签
 
 3. 主题定制：
-   - 在 css/style.css 中修改 :root 变量以更改配色方案
+   - 在 `css/style.css` 中修改 `:root` 变量以更改配色方案
 
 ## 注意事项
 
@@ -99,8 +105,6 @@ cd personal-portfolio
   - 新增了 YouTube 链接 (https://www.youtube.com/@sonicyann)
   - 新增了 Instagram 链接 (https://www.instagram.com/sonic_yann/)
   - 更新了 Twitter 链接 (https://twitter.com/yngshngwi6)
-
-
 
 ## 许可证
 
