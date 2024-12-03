@@ -91,6 +91,17 @@ cd personal-portfolio
 
 欢迎提交 Issue 和 Pull Request 来改进项目。
 
+## 更新日志
+
+### 2024-03-21
+- 更新了社交媒体链接
+  - 移除了 LinkedIn 图标
+  - 新增了 YouTube 链接 (https://www.youtube.com/@sonicyann)
+  - 新增了 Instagram 链接 (https://www.instagram.com/sonic_yann/)
+  - 更新了 Twitter 链接 (https://twitter.com/yngshngwi6)
+
+
+
 ## 许可证
 
 MIT License - 查看 [LICENSE](LICENSE) 文件了解详情。

@@ -5,6 +5,17 @@
     --text-color: #FFFFFF;       /* 文本颜色 */
     --secondary-color: #2A2A2A;  /* 次要背景色 - 用于卡片和区块 */
     --accent-color: #8A8AFF;     /* 辅助强调色 */
+    --font-size-xs: 0.75rem;    /* 12px - 小号辅助文本 */
+    --font-size-sm: 0.875rem;   /* 14px - 次要文本 */
+    --font-size-base: 1rem;     /* 16px - 基础文本 */
+    --font-size-lg: 1.125rem;   /* 18px - 大号文本 */
+    --font-size-xl: 1.25rem;    /* 20px - 小标题 */
+    --font-size-2xl: 1.5rem;    /* 24px - 中标题 */
+    --font-size-3xl: 2rem;      /* 32px - 大标题 */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 }
 
 /* 全局重置样式 */
@@ -39,8 +50,8 @@ body {
 .nav-brand a {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
     font-family: 'Poppins', sans-serif;
     letter-spacing: 0.05em;
 }
@@ -77,10 +88,9 @@ body {
     text-decoration: none;
     padding: 0.5rem 1rem;
     transition: color 0.3s ease;
-    font-size: 1rem;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.02em;
 }
 
 .nav-links li a:hover {
@@ -102,29 +112,38 @@ body {
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 2rem;
-    border-radius: 15px;
-    background: rgba(10, 10, 10, 0.6); /* 半透明背景 */
-    backdrop-filter: blur(10px); /* 背景模糊效果 */
-    -webkit-backdrop-filter: blur(10px); /* Safari 支持 */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem 2.5rem;  /* 进一步减小内边距 */
+    max-width: 500px;      /* 减小最大宽度 */
+    margin: 0 auto;
+    background: rgba(10, 10, 10, 0.6);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字阴影 */
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.8rem; /* 减小下边距 */
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-normal);
+    margin-bottom: 0.4rem; /* 减小段落间距 */
+    color: var(--text-color);
+    opacity: 0.9;
+    letter-spacing: 0.01em;
 }
 
 /* 高亮文本样式 */
 .highlight {
     color: var(--primary-color);
+    font-weight: 700;
 }
 
 /* 按钮基础样式 */
@@ -174,7 +193,7 @@ footer {
 
 .social-links a {
     color: var(--text-color);
-    font-size: 1.5rem;
+    font-size: var(--font-size-xl);
     margin: 0 1rem;
     transition: all 0.3s ease;
 }
@@ -225,6 +244,27 @@ footer {
     /* 移除最后一个链接的底部边框 */
     .nav-links li:last-child a {
         border-bottom: none;
+    }
+
+    .hero-content {
+        padding: 1.5rem;
+        margin: 0 1rem;
+        max-width: 400px;  /* 移动端更窄 */
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    :root {
+        /* 移动端稍微缩小字体 */
+        --font-size-3xl: 1.75rem;  /* 28px */
+        --font-size-2xl: 1.375rem; /* 22px */
+        --font-size-xl: 1.125rem;  /* 18px */
     }
 }
 

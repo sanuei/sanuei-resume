@@ -13,7 +13,8 @@
 
 /* 页面标题样式 */
 .projects-header h1 {
-    font-size: 2.5rem;
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
     color: var(--primary-color);
     margin-bottom: 20px;
 }
@@ -74,13 +75,14 @@
 }
 
 .project-header h3 {
-    font-size: 1.2rem;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
     color: var(--primary-color);
 }
 
 .project-date {
     color: #aaa;
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
 }
 
 .project-tech {
@@ -89,7 +91,7 @@
 
 .tech-item {
     margin-bottom: 0.8rem;
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
 }
 
 .tech-item strong {
@@ -104,7 +106,7 @@
 
 .project-description p {
     color: #aaa;
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
     margin-bottom: 1rem;
     line-height: 1.5;
 }
@@ -120,7 +122,8 @@
     color: var(--primary-color);
     padding: 0.3rem 0.8rem;
     border-radius: 12px;
-    font-size: 0.8rem;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
 }
 
 /* 响应式设计 */
@@ -128,4 +131,25 @@
     .projects-grid {
         grid-template-columns: 1fr; /* 移动端单列显示 */
     }
+}
+
+/* 项目图片容器样式 */
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* 鼠标悬停时的图片放大效果 */
+.project-image:hover img {
+    transform: scale(1.05);
 } 

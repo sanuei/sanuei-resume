@@ -20,10 +20,10 @@
             <i class="fas fa-bars"></i>
         </div>
         <ul class="nav-links">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="resume.html">简历</a></li>
-            <li><a href="projects.html">项目</a></li>
-            <li><a href="github.html">GitHub</a></li>
+            <li><a href="index.html" data-i18n="home">首页</a></li>
+            <li><a href="resume.html" data-i18n="resume">简历</a></li>
+            <li><a href="projects.html" data-i18n="projects">项目</a></li>
+            <li><a href="github.html" data-i18n="github">GitHub</a></li>
             <li class="language-dropdown">
                 <a href="#" class="language-btn">
                     <i class="fas fa-globe"></i>
@@ -38,19 +38,21 @@
     </nav>
 
     <main class="resume-container">
+        <section class="resume-header-title">
+            <h1 data-i18n="resume-title">履历書</h1>
+        </section>
+
         <section class="resume-header">
             <div class="profile-info">
                 <div class="name-block">
-                    <h1>
-                        <div class="name-row">
-                            <span class="surname" data-i18n="surname">楊</span>
-                            <span class="firstname" data-i18n="firstname">尚衛</span>
-                        </div>
-                        <div class="name-phonetic">
-                            <span data-i18n="surname-phonetic">ヤン</span>
-                            <span data-i18n="firstname-phonetic">サンウエイ</span>
-                        </div>
-                    </h1>
+                    <div class="name-row">
+                        <span class="surname" data-i18n="surname">楊</span>
+                        <span class="firstname" data-i18n="firstname">尚衛</span>
+                    </div>
+                    <div class="name-phonetic">
+                        <span data-i18n="surname-phonetic">ヤン</span>
+                        <span data-i18n="firstname-phonetic">サンウエイ</span>
+                    </div>
                 </div>
                 <div class="contact-info">
                     <p><i class="fas fa-envelope"></i> sanuei.yann@gmail.com</p>
@@ -74,7 +76,7 @@
                 <div class="timeline-item">
                     <div class="date">2016.09 - 2020.07</div>
                     <div class="content">
-                        <h3 data-i18n="school-2">南京藝術學院</h3>
+                        <h3 data-i18n="school-2">南京艺术学院</h3>
                         <p data-i18n="major-2">媒体设计专业</p>
                     </div>
                 </div>
@@ -94,15 +96,15 @@
                 <div class="timeline-item">
                     <div class="date">2023.10 - 2024.08</div>
                     <div class="content">
-                        <h3>(株)Great Navigation</h3>
-                        <p>Web开发工程师</p>
+                        <h3 data-i18n="company2">(株)Great Navigation</h3>
+                        <p data-i18n="position2">Web开发工程师</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="date">2020.10 - 2021.10</div>
                     <div class="content">
-                        <h3>南京德基廣場有限公司</h3>
-                        <p>媒体设计师</p>
+                        <h3 data-i18n="company3">南京德基广场有限公司</h3>
+                        <p data-i18n="position3">媒体设计师</p>
                     </div>
                 </div>
             </div>
@@ -112,7 +114,7 @@
             <h2><i class="fas fa-code"></i> <span data-i18n="skills">技术技能</span></h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3 data-i18n="backend">后端开发</h3>
+                    <h3 data-i18n="backend-skills">后端开发</h3>
                     <div class="skill-tags">
                         <span class="tag">JAVA</span>
                         <span class="tag">Springboot</span>
@@ -122,7 +124,7 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>前端开发</h3>
+                    <h3 data-i18n="frontend-skills">前端开发</h3>
                     <div class="skill-tags">
                         <span class="tag">React</span>
                         <span class="tag">Vue</span>
@@ -132,7 +134,7 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>AI工具</h3>
+                    <h3 data-i18n="ai-tools">AI工具</h3>
                     <div class="skill-tags">
                         <span class="tag">ChatGPT</span>
                         <span class="tag">Cursor</span>
@@ -140,11 +142,11 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>设计技能</h3>
+                    <h3 data-i18n="design-skills">设计技能</h3>
                     <div class="skill-tags">
-                        <span class="tag">グラフィックデザイン</span>
-                        <span class="tag">ビデオ編集</span>
-                        <span class="tag">撮影</span>
+                        <span class="tag" data-i18n="graphic-design">平面设计</span>
+                        <span class="tag" data-i18n="video-editing">视频编辑</span>
+                        <span class="tag" data-i18n="photography">摄影</span>
                     </div>
                 </div>
             </div>
@@ -156,7 +158,7 @@
                 <div class="certificate">
                     <i class="fas fa-award"></i>
                     <h3>JLPT N2</h3>
-                    <p data-i18n="jlpt-n2-desc">日语能力测试二级</p>
+                    <p data-i18n="jlpt-n2">日本語能力試験N2</p>
                 </div>
             </div>
         </section>
@@ -164,8 +166,10 @@
         <section class="resume-section">
             <h2><i class="fas fa-user"></i> <span data-i18n="selfIntro">自我介绍</span></h2>
             <div class="self-introduction">
-                <p data-i18n="intro-p1">我是一名热爱学习的开发者，拥有媒体设计背景和Web开发经验。通过不断学习和实践，我掌握了全栈开发所需的各种技能。我相信只要有努力和热情，在任何领域都能取得进步。</p>
-                <p data-i18n="intro-p2">8年的滑板经历教会我坚持和专注的重要性，同时也帮助我建立了广泛的人际网络，丰富了我的人生经验。</p>
+                <p data-i18n="intro-p1">フルスタック開発者として、Java/SpringBootを中心としたバックエンド開発から、HTML/CSS/JavaScriptによるフロントエンド開発まで、幅広い技術スタックを持っています。</p>
+                <p data-i18n="intro-p2">AI技術に強い関心を持ち、ChatGPTやGitHub Copilotなどの最新のAIツールを積極的に活用し、開発効率の向上とコード品質の改善に取り組んでいます。</p>
+                <p data-i18n="intro-p3">チーム開発においては、GitやSVNを用いたバージョン管理、アジャイル開発手法を実践し、効率的なプロジェクト進行に貢献してきました。</p>
+                <p data-i18n="intro-p4">新しい技術への探究心を持ち、継続的な学習を通じて技術力の向上に努めています。特に、クラウドコンピューティングやマイクロサービスアーキテクチャに関心があり、AWS認定資格の取得を目指しています。</p>
             </div>
         </section>
     </main>
