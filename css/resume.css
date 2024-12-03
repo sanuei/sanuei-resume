@@ -1,164 +1,273 @@
-/* 简历页面容器样式 */
+/* 简历页面容器 */
 .resume-container {
-    max-width: 1200px;
-    margin: 80px auto 40px; /* 顶部留出导航栏空间 */
+    max-width: 1000px;
+    margin: 80px auto 40px;
     padding: 20px;
 }
 
-/* 简历页面头部样式 */
+/* 简历头部样式 */
 .resume-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
     margin-bottom: 40px;
+    padding: 30px;
+    background: var(--secondary-color);
+    border-radius: 10px;
 }
 
-/* 简历标题样式 */
-.resume-header h1 {
+.profile-info h1 {
     font-size: 2.5rem;
+    margin-bottom: 20px;
     color: var(--primary-color);
 }
 
-/* 简历内容区块样式 */
-.resume-section {
-    background-color: var(--secondary-color);
-    border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 30px;
-    transition: transform 0.3s ease; /* 添加悬停动画 */
+.name-phonetic {
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.8;
 }
 
-/* 区块标题样式 */
+.contact-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 简历部分通用样式 */
+.resume-section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: var(--secondary-color);
+    border-radius: 10px;
+}
+
 .resume-section h2 {
     color: var(--primary-color);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 10px; /* 图标和文字间距 */
+    gap: 10px;
 }
 
-/* 个人信息网格布局 */
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+/* 时间线样式 */
+.timeline {
+    position: relative;
 }
 
-/* 信息项样式 */
-.info-item {
-    padding: 10px;
-    background-color: rgba(108, 99, 255, 0.1); /* 半透明背景 */
-    border-radius: 4px;
+.timeline-item {
+    display: flex;
+    margin-bottom: 20px;
+    position: relative;
 }
 
-/* 技能网格布局 */
+.timeline-item .date {
+    min-width: 150px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.timeline-item .content {
+    flex: 1;
+    padding-left: 20px;
+    border-left: 2px solid var(--primary-color);
+}
+
+.timeline-item .content h3 {
+    margin-bottom: 5px;
+}
+
+/* 技能网格 */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
 }
 
-/* 技能类别样式 */
+.skill-category {
+    background: rgba(108, 99, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(108, 99, 255, 0.1);
+}
+
 .skill-category h3 {
-    color: var(--accent-color);
+    color: var(--primary-color);
     margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
-/* 技能标签容器 */
 .skill-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-/* 技能标签样式 */
-.skill-tag {
-    background-color: rgba(108, 99, 255, 0.2);
+.tag {
+    background: rgba(108, 99, 255, 0.1);
     color: var(--primary-color);
-    padding: 5px 15px;
-    border-radius: 20px;
+    padding: 6px 15px;
+    border-radius: 15px;
     font-size: 0.9rem;
-    transition: transform 0.2s ease; /* 添加悬停动画 */
+    display: inline-block;
+    margin: 0.2rem;
+    transition: all 0.3s ease;
 }
 
-/* 技能标签悬停效果 */
-.skill-tag:hover {
+.tag:hover {
+    background: rgba(108, 99, 255, 0.2);
     transform: translateY(-2px);
 }
 
-/* 工作经历和教育经历项样式 */
-.experience-item, .education-item {
-    margin-bottom: 25px;
+/* 证书样式 */
+.certificates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-/* 经历标题样式 */
-.experience-item h3, .education-item h3 {
-    color: var(--accent-color);
-    margin-bottom: 5px;
+.certificate {
+    text-align: center;
+    padding: 20px;
+    background: rgba(108, 99, 255, 0.1);
+    border-radius: 10px;
 }
 
-/* 公司/学校信息样式 */
-.company, .school {
+.certificate i {
+    font-size: 2rem;
     color: var(--primary-color);
-    font-size: 0.9rem;
     margin-bottom: 10px;
 }
 
-/* 经历详情列表样式 */
-.experience-details {
-    list-style-position: inside;
-    padding-left: 20px;
+/* 自我介绍样式 */
+.self-introduction {
+    line-height: 1.8;
 }
 
-/* 经历详情项样式 */
-.experience-details li {
-    margin-bottom: 5px;
-    line-height: 1.6;
-}
-
-/* 下载按钮容器样式 */
-.download-btn {
-    margin-left: 20px;
+.self-introduction p {
+    margin-bottom: 15px;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    /* 移动端头部布局 */
-    .resume-header {
+    .timeline-item {
         flex-direction: column;
-        gap: 20px;
-        text-align: center;
     }
+    
+    .timeline-item .date {
+        margin-bottom: 10px;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        align-items: center;
+    }
+} 
 
-    /* 移动端下载按钮 */
-    .download-btn {
-        margin-left: 0;
-    }
-
-    /* 移动端信息网格 */
-    .info-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* 移动端技能网格 */
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
+/* 更新姓名块样式 */
+.name-block {
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-/* 打印样式优化 */
-@media print {
-    .resume-container {
-        margin: 0;
-        padding: 20px;
-    }
+.name-block h1 {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
 
-    .navbar, .footer, .download-btn {
-        display: none; /* 打印时隐藏不必要的元素 */
-    }
+.name-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 3rem;
+}
 
-    .resume-section {
-        break-inside: avoid; /* 避免在打印时分页 */
-        page-break-inside: avoid;
-    }
+.name-phonetic {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* 语言切换按钮样式 */
+.language-switcher {
+    position: absolute;
+    top: 100px;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 100;
+}
+
+.lang-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary-color);
+    background: rgba(42, 42, 42, 0.9);
+    color: var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.lang-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.lang-btn:hover {
+    background: var(--primary-color);
+    color: white;
+} 
+
+/* 更新字体样式 */
+.name-block h1 {
+    font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+    font-weight: 700;
+}
+
+.name-row {
+    font-size: 3.5rem;
+    letter-spacing: 0.05em;
+}
+
+.name-phonetic {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+}
+
+.resume-section h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.timeline-item h3 {
+    font-family: 'Noto Sans JP', 'Noto Sans SC', sans-serif;
+    font-weight: 500;
+}
+
+.skill-category h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.tag {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 } 

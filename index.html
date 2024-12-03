@@ -24,10 +24,20 @@
         </div>
         <!-- 导航链接 -->
         <ul class="nav-links">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="resume.html">简历</a></li>
-            <li><a href="projects.html">项目</a></li>
-            <li><a href="github.html">GitHub</a></li>
+            <li><a href="index.html" data-i18n="home">首页</a></li>
+            <li><a href="resume.html" data-i18n="resume">简历</a></li>
+            <li><a href="projects.html" data-i18n="projects">项目履历</a></li>
+            <li><a href="github.html" data-i18n="github">GitHub</a></li>
+            <li class="language-dropdown">
+                <a href="#" class="language-btn">
+                    <i class="fas fa-globe"></i>
+                </a>
+                <div class="language-menu">
+                    <a href="#" data-lang="zh" class="active">中文</a>
+                    <a href="#" data-lang="en">English</a>
+                    <a href="#" data-lang="ja">日本語</a>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -36,12 +46,12 @@
         <canvas id="heroCanvas"></canvas>
         <div class="hero-content">
             <!-- 个人介绍 -->
-            <h1>你好，我是 <span class="highlight">Sanuei</span></h1>
-            <p>全栈开发工程师 | 开源爱好者</p>
+            <h1 data-i18n="hello">你好，我是杨尚卫 <span class="highlight">Sanuei</span></h1>
+            <p data-i18n="role">全栈开发工程师 | 开源爱好者</p>
             <!-- 行动按钮 -->
             <div class="cta-buttons">
-                <a href="projects.html" class="btn primary">查看作品</a>
-                <a href="resume.html" class="btn secondary">我的简历</a>
+                <a href="github.html" class="btn primary" data-i18n="view-github">GitHub</a>
+                <a href="resume.html" class="btn secondary" data-i18n="view-resume">我的简历</a>
             </div>
         </div>
     </main>
@@ -51,8 +61,9 @@
         <!-- 社交媒体链接 -->
         <div class="social-links">
             <a href="https://github.com/Sanuei" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.youtube.com/@sonicyann" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/sonic_yann/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/yngshngwi6" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
         </div>
         <!-- 版权信息 -->
         <p>&copy; 2024 Sanuei. All rights reserved.</p>
@@ -61,5 +72,6 @@
     <!-- JavaScript 文件引入 -->
     <script src="js/main.js"></script>
     <script src="js/hero-animation.js"></script>
+    <script src="js/i18n.js"></script>
 </body>
 </html> 

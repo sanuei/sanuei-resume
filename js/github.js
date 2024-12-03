@@ -1,158 +1,242 @@
 /**
+ * 缓存管理类
+ * 处理数据的本地存储和过期逻辑
+ */
+class CacheManager {
+    constructor(ttl = 3600000) { // 默认缓存1小时
+        this.ttl = ttl;
+    }
+
+    /**
+     * 设置缓存
+     * @param {string} key - 缓存键名
+     * @param {*} data - 要缓存的数据
+     */
+    set(key, data) {
+        const item = {
+            data,
+            timestamp: Date.now()
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+    }
+
+    /**
+     * 获取缓存
+     * @param {string} key - 缓存键名
+     * @returns {*} 缓存的数据或null
+     */
+    get(key) {
+        const item = localStorage.getItem(key);
+        if (!item) return null;
+
+        const { data, timestamp } = JSON.parse(item);
+        const now = Date.now();
+
+        // 检查缓存是否过期
+        if (now - timestamp > this.ttl) {
+            localStorage.removeItem(key);
+            return null;
+        }
+
+        return data;
+    }
+
+    /**
+     * 清除指定的缓存
+     * @param {string} key - 缓存键名
+     */
+    clear(key) {
+        localStorage.removeItem(key);
+    }
+
+    /**
+     * 清除所有缓存
+     */
+    clearAll() {
+        localStorage.clear();
+    }
+}
+
+/**
  * GitHub API 封装类
- * 处理与GitHub API的所有交互
  */
 class GitHubAPI {
-    /**
-     * @param {string} username - GitHub用户名
-     */
     constructor(username) {
         this.username = username;
         this.baseUrl = 'https://api.github.com';
+        this.cache = new CacheManager();
     }
 
     /**
      * 获取用户个人资料
-     * @returns {Promise<Object>} 用户资料数据
      */
     async getProfile() {
-        const response = await fetch(`${this.baseUrl}/users/${this.username}`);
-        return await response.json();
+        const cacheKey = `github_profile_${this.username}`;
+        
+        // 尝试从缓存获取数据
+        const cachedData = this.cache.get(cacheKey);
+        if (cachedData) {
+            console.log('Using cached profile data');
+            return cachedData;
+        }
+
+        try {
+            const response = await fetch(`${this.baseUrl}/users/${this.username}`);
+            if (!response.ok) throw new Error('Failed to fetch profile');
+            
+            const data = await response.json();
+            
+            // 缓存新数据
+            this.cache.set(cacheKey, data);
+            return data;
+        } catch (error) {
+            console.error('Error fetching profile:', error);
+            throw error;
+        }
     }
 
     /**
      * 获取用户的仓库列表
-     * @returns {Promise<Array>} 仓库列表数据
      */
     async getRepositories() {
-        const response = await fetch(
-            `${this.baseUrl}/users/${this.username}/repos?sort=stars&per_page=6`
-        );
-        return await response.json();
+        const cacheKey = `github_repos_${this.username}`;
+        
+        // 尝试从缓存获取数据
+        const cachedData = this.cache.get(cacheKey);
+        if (cachedData) {
+            console.log('Using cached repositories data');
+            return cachedData;
+        }
+
+        try {
+            const response = await fetch(
+                `${this.baseUrl}/users/${this.username}/repos?sort=stars&per_page=6`
+            );
+            if (!response.ok) throw new Error('Failed to fetch repositories');
+            
+            const data = await response.json();
+            
+            // 缓存新数据
+            this.cache.set(cacheKey, data);
+            return data;
+        } catch (error) {
+            console.error('Error fetching repositories:', error);
+            throw error;
+        }
     }
 }
 
 /**
  * GitHub UI 处理类
- * 负责页面渲染和用户交互
  */
 class GitHubUI {
-    /**
-     * @param {string} username - GitHub用户名
-     */
     constructor(username) {
         this.api = new GitHubAPI(username);
         this.initUI();
     }
 
-    /**
-     * 初始化UI，获取并显示数据
-     */
     async initUI() {
         try {
-            const profile = await this.api.getProfile();
-            const repos = await this.api.getRepositories();
+            // 显示加载状态
+            this.showLoading();
+
+            const [profile, repos] = await Promise.all([
+                this.api.getProfile(),
+                this.api.getRepositories()
+            ]);
             
             this.updateProfile(profile);
             this.updateStats(profile, repos);
             this.updateRepositories(repos);
         } catch (error) {
-            console.error('Error fetching GitHub data:', error);
+            console.error('Error initializing UI:', error);
             this.showError();
         }
     }
 
-    /**
-     * 更新个人资料显示
-     * @param {Object} profile - 用户资料数据
-     */
-    updateProfile(profile) {
-        const profileElement = document.getElementById('profile');
-        profileElement.innerHTML = `
-            <div class="profile-avatar">
-                <img src="${profile.avatar_url}" alt="${profile.name}">
-            </div>
-            <div class="profile-info">
-                <h1>${profile.login}</h1>
-                <p>エンジニア</p>
-                <p class="profile-bio">${profile.bio || ''}</p>
+    showLoading() {
+        const repoGrid = document.getElementById('repoGrid');
+        repoGrid.innerHTML = `
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>正在加载数据...</p>
             </div>
         `;
     }
 
-    /**
-     * 更新统计信息显示
-     * @param {Object} profile - 用户资料数据
-     * @param {Array} repos - 仓库列表数据
-     */
+    updateProfile(profile) {
+        // 更新个人信息显示
+        document.querySelector('.profile-info h1').textContent = profile.name || profile.login;
+        document.querySelector('.profile-bio').textContent = profile.bio || 'Full Stack Developer';
+        
+        // 更新统计数据
+        document.getElementById('followers').textContent = profile.followers;
+        document.getElementById('following').textContent = profile.following;
+        document.getElementById('publicRepos').textContent = profile.public_repos;
+    }
+
     updateStats(profile, repos) {
-        // 更新仓库数量
+        // 更新统计卡片
         document.getElementById('repoCount').textContent = profile.public_repos;
         
-        // 计算并更新总星标数
         const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
         document.getElementById('totalStars').textContent = totalStars;
 
-        // 计算并更新最常用语言
         const languages = repos.map(repo => repo.language).filter(Boolean);
         const topLanguage = this.getMostFrequent(languages);
         document.getElementById('topLanguage').textContent = topLanguage || 'N/A';
     }
 
-    /**
-     * 更新仓库列表显示
-     * @param {Array} repos - 仓库列表数据
-     */
     updateRepositories(repos) {
         const repoGrid = document.getElementById('repoGrid');
-        repoGrid.innerHTML = repos.map(repo => `
-            <div class="repo-card">
-                <h3>${repo.name}</h3>
-                <p>${repo.description || '暂无描述'}</p>
-                <div class="repo-stats">
-                    <span class="repo-stat">
-                        <i class="fas fa-star"></i>
-                        ${repo.stargazers_count}
-                    </span>
-                    <span class="repo-stat">
-                        <i class="fas fa-code-branch"></i>
-                        ${repo.forks_count}
-                    </span>
-                    <span class="repo-stat">
-                        <i class="fas fa-circle"></i>
-                        ${repo.language || 'N/A'}
-                    </span>
-                </div>
-            </div>
-        `).join('');
+        if (repos.length === 0) {
+            repoGrid.innerHTML = `<p class="no-repos" data-i18n="noRepos">暂无公开仓库</p>`;
+            return;
+        }
+
+        repoGrid.innerHTML = repos.map(repo => this.createRepoCard(repo)).join('');
+        // 更新完DOM后重新应用翻译
+        translate(currentLang);
     }
 
-    /**
-     * 获取数组中出现最多的元素
-     * @param {Array} arr - 输入数组
-     * @returns {*} 出现频率最高的元素
-     */
+    createRepoCard(repo) {
+        return `
+            <div class="repo-card">
+                <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+                <p>${repo.description || '暂无描述'}</p>
+                <div class="repo-stats">
+                    <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                    <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                    ${repo.language ? `<span><i class="fas fa-circle"></i> ${repo.language}</span>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
     getMostFrequent(arr) {
+        if (arr.length === 0) return null;
         return arr.sort((a,b) =>
             arr.filter(v => v === a).length - arr.filter(v => v === b).length
         ).pop();
     }
 
-    /**
-     * 显示错误信息
-     */
     showError() {
-        const container = document.querySelector('.github-container');
-        container.innerHTML = `
+        const repoGrid = document.getElementById('repoGrid');
+        repoGrid.innerHTML = `
             <div class="error-message">
                 <i class="fas fa-exclamation-circle"></i>
-                <p>获取GitHub数据时出错，请稍后再试。</p>
+                <p data-i18n="error">获取GitHub数据时出错，请稍后再试。</p>
+                <button onclick="location.reload()" class="retry-btn">
+                    <i class="fas fa-sync"></i> <span data-i18n="retry">重试</span>
+                </button>
             </div>
         `;
+        // 更新完DOM后重新应用翻译
+        translate(currentLang);
     }
 }
 
-// 页面加载完成后初始化GitHub页面
+// 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
     new GitHubUI('sanuei');
 }); 

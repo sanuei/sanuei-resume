@@ -4,7 +4,7 @@
     <!-- 基本元数据 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>项目展示 - Sanuei</title>
+    <title>项目履历 - Sanuei</title>
     
     <!-- 样式表引入 -->
     <link rel="stylesheet" href="css/style.css">
@@ -17,7 +17,7 @@
     <nav class="navbar">
         <!-- 网站品牌/Logo -->
         <div class="nav-brand">
-            <a href="index.html">Sanuei</a>
+            <a href="index.html">Yan_Sanuei</a>
         </div>
         <!-- 移动端菜单按钮 -->
         <div class="nav-toggle" id="navToggle">
@@ -29,6 +29,16 @@
             <li><a href="resume.html">简历</a></li>
             <li><a href="projects.html">项目</a></li>
             <li><a href="github.html">GitHub</a></li>
+            <li class="language-dropdown">
+                <a href="#" class="language-btn">
+                    <i class="fas fa-globe"></i>
+                </a>
+                <div class="language-menu">
+                    <a href="#" data-lang="zh" class="active">中文</a>
+                    <a href="#" data-lang="en">English</a>
+                    <a href="#" data-lang="ja">日本語</a>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -36,91 +46,118 @@
     <main class="projects-container">
         <!-- 项目页面头部 -->
         <section class="projects-header">
-            <h1>项目展示</h1>
-            <!-- 项目分类过滤器 -->
-            <div class="project-filters">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="web">Web开发</button>
-                <button class="filter-btn" data-filter="mobile">移动应用</button>
-                <button class="filter-btn" data-filter="other">其他项目</button>
-            </div>
+            <h1 data-i18n="projects">项目履历</h1>
         </section>
 
         <!-- 项目卡片网格 -->
         <div class="projects-grid">
-            <!-- 电商平台项目卡片 -->
-            <article class="project-card" data-category="web">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop" 
-                         alt="电商平台项目">
-                    <div class="project-links">
-                        <a href="#" class="project-link" rel="noopener"><i class="fas fa-external-link-alt"></i></a>
-                        <a href="#" class="project-link" rel="noopener"><i class="fab fa-github"></i></a>
-                    </div>
+            <!-- 项目1：e-staffing系统 -->
+            <article class="project-card">
+                <div class="project-header">
+                    <h3>e-staffing人材派遣管理システム</h3>
+                    <span class="project-date">2023.12 - 2024.01</span>
                 </div>
-                <!-- 项目信息 -->
-                <div class="project-info">
-                    <h3>电商平台开发</h3>
-                    <p>基于React和Node.js的现代电商平台，支持支付集成和实时库存管理。</p>
-                    <!-- 技术标签 -->
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">MongoDB</span>
+                <div class="project-content">
+                    <div class="project-tech">
+                        <div class="tech-item">
+                            <strong>環境：</strong>
+                            <span>Windows / MySQL</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>言語：</strong>
+                            <span>Java, SpringBoot, MyBatis</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>フロント：</strong>
+                            <span>HTML, CSS, JavaScript, jQuery</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>ツール：</strong>
+                            <span>Eclipse, Git, VSCode</span>
+                        </div>
                     </div>
-                </div>
-            </article>
-
-            <!-- 健康追踪App项目卡片 -->
-            <article class="project-card" data-category="mobile">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800&auto=format&fit=crop" 
-                         alt="健康追踪App界面预览">
-                    <div class="project-links">
-                        <a href="https://github.com/yourusername/health-tracker" class="project-link" target="_blank" rel="noopener">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://health-tracker-demo.com" class="project-link" target="_blank" rel="noopener">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- 项目信息 -->
-                <div class="project-info">
-                    <h3>健康追踪App</h3>
-                    <p>一个用于追踪健康数据的移动应用，支持实时数据可视化和健康建议。</p>
-                    <!-- 技术标签 -->
-                    <div class="project-tags">
-                        <span class="tag">React Native</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">MongoDB</span>
+                    <div class="project-description">
+                        <p>複数の派遣会社とのやり取りを一元化する、派遣管理システム</p>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">SpringBoot</span>
+                            <span class="tag">MyBatis</span>
+                            <span class="tag">jQuery</span>
+                        </div>
                     </div>
                 </div>
             </article>
 
-            <!-- 数据可视化项目卡片 -->
-            <article class="project-card" data-category="web">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop" 
-                         alt="数据可视化项目预览">
-                    <div class="project-links">
-                        <a href="https://github.com/yourusername/data-visualization" class="project-link" target="_blank" rel="noopener">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://data-viz-demo.com" class="project-link" target="_blank" rel="noopener">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
+            <!-- 项目2：通信方式选定工具 -->
+            <article class="project-card">
+                <div class="project-header">
+                    <h3>通信方式選定ツール（電柱）</h3>
+                    <span class="project-date">2024.02 - 2024.06</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-tech">
+                        <div class="tech-item">
+                            <strong>環境：</strong>
+                            <span>Windows / MySQL</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>言語：</strong>
+                            <span>Java, SpringBoot, JSP</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>フロント：</strong>
+                            <span>CSS, JavaScript, jQuery</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>ツール：</strong>
+                            <span>Eclipse</span>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <p>StrutsからSpringbootに移行するプロジェクト</p>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">SpringBoot</span>
+                            <span class="tag">JSP</span>
+                            <span class="tag">jQuery</span>
+                        </div>
                     </div>
                 </div>
-                <!-- 项目信息 -->
-                <div class="project-info">
-                    <h3>数据可视化</h3>
-                    <p>一个用于数据可视化的Web应用，支持多种数据源和交互式可视化效果。</p>
-                    <!-- 技术标签 -->
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">MongoDB</span>
+            </article>
+
+            <!-- 项目3：Java培训项目 -->
+            <article class="project-card">
+                <div class="project-header">
+                    <h3>Javaプログラミングスクール</h3>
+                    <span class="project-date">2023.10 - 2023.11</span>
+                </div>
+                <div class="project-content">
+                    <div class="project-tech">
+                        <div class="tech-item">
+                            <strong>環境：</strong>
+                            <span>Windows / MySQL</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>言語：</strong>
+                            <span>Java, SpringBoot, MyBatis</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>フロント：</strong>
+                            <span>HTML, CSS, JavaScript, Vue.js</span>
+                        </div>
+                        <div class="tech-item">
+                            <strong>ツール：</strong>
+                            <span>Eclipse, SVN, Git, VSCode</span>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <p>Javaの基本からWebサイト構築、フレームワークまでの総合的な研修</p>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">SpringBoot</span>
+                            <span class="tag">MyBatis</span>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -131,9 +168,10 @@
     <footer>
         <!-- 社交媒体链接 -->
         <div class="social-links">
-            <a href="https://github.com/sanuei" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/Sanuei" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="https://www.youtube.com/@sonicyann" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/sonic_yann/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/yngshngwi6" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
         </div>
         <!-- 版权信息 -->
         <p>&copy; 2024 Sanuei. All rights reserved.</p>
@@ -142,5 +180,6 @@
     <!-- JavaScript 文件引入 -->
     <script src="js/main.js"></script>
     <script src="js/projects.js"></script>
+    <script src="js/i18n.js"></script>
 </body>
 </html> 

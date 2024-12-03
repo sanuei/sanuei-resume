@@ -16,7 +16,7 @@
 
 /* 基础页面样式 */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', 'Noto Sans SC', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -40,7 +40,9 @@ body {
     color: var(--primary-color);
     text-decoration: none;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.05em;
 }
 
 /* 移动端菜单按钮样式 */
@@ -69,12 +71,16 @@ body {
 }
 
 /* 导航链接样式 */
-.nav-links li a {
+.nav-links li a,
+.nav-links .language-menu a {
     color: var(--text-color);
     text-decoration: none;
     padding: 0.5rem 1rem;
     transition: color 0.3s ease;
     font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .nav-links li a:hover {
@@ -93,9 +99,27 @@ body {
 }
 
 /* 英雄区域内容样式 */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    border-radius: 15px;
+    background: rgba(10, 10, 10, 0.6); /* 半透明背景 */
+    backdrop-filter: blur(10px); /* 背景模糊效果 */
+    -webkit-backdrop-filter: blur(10px); /* Safari 支持 */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
 .hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字阴影 */
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* 高亮文本样式 */
@@ -110,43 +134,54 @@ body {
     margin: 0.5rem;
     border-radius: 5px;
     text-decoration: none;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-shadow: none; /* 移除按钮文字阴影 */
 }
 
 .btn:hover {
-    transform: translateY(-2px); /* 悬停时上浮效果 */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
 }
 
 /* 主要按钮样式 */
 .primary {
     background-color: var(--primary-color);
     color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
 }
 
 /* 次要按钮样式 */
 .secondary {
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
+    backdrop-filter: blur(5px);
 }
 
-/* 页脚样式 */
+/* 更新页脚样式 */
 footer {
     text-align: center;
     padding: 2rem;
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
+    border-top: 1px solid var(--secondary-color);
 }
 
-/* 社交媒体链接样式 */
+.social-links {
+    margin-bottom: 1rem;
+}
+
 .social-links a {
     color: var(--text-color);
     font-size: 1.5rem;
     margin: 0 1rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .social-links a:hover {
     color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 /* 响应式设计 */
@@ -205,4 +240,100 @@ footer {
 .hero-content {
     position: relative;
     z-index: 2;
+}
+
+/* 添加语言切换按钮样式 */
+.language-dropdown {
+    position: relative;
+}
+
+.language-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--secondary-color);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    min-width: 120px;
+    opacity: 0.0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.language-dropdown:hover .language-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.language-menu a:hover {
+    background: rgba(108, 99, 255, 0.1);
+    color: var(--primary-color);
+}
+
+.language-menu a.active {
+    color: var(--primary-color);
+    background: rgba(108, 99, 255, 0.05);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .language-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .language-dropdown {
+        width: 100%;
+    }
+
+    .language-menu a {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* 确保GitHub文本也使用相同的字体设置 */
+.nav-links li a[href*="github"] {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* 更新导航链接样式，确保图标垂直居中 */
+.nav-links li a,
+.language-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.language-btn i {
+    font-size: 1rem; /* 确保图标大小与文字一致 */
+    line-height: 1;
 } 

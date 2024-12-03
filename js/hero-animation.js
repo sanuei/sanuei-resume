@@ -2,117 +2,81 @@ class HeroAnimation {
     constructor() {
         this.canvas = document.getElementById('heroCanvas');
         this.ctx = this.canvas.getContext('2d');
-        this.circles = [];
-        this.colors = [
-            '#FF3366', // 亮粉红
-            '#33FF66', // 亮绿
-            '#6633FF', // 亮紫
-            '#FFFF33', // 亮黄
-            '#FF6633', // 亮橙
-            '#33FFFF'  // 亮青
-        ];
+        this.gridSize = 40;
+        this.points = [];
         
         this.resize();
         window.addEventListener('resize', () => this.resize());
-        this.initCircles();
+        this.initGrid();
         this.animate();
     }
 
     resize() {
         this.canvas.width = this.canvas.offsetWidth;
         this.canvas.height = this.canvas.offsetHeight;
-        this.initCircles();
+        this.initGrid();
     }
 
-    initCircles() {
-        this.circles = [];
-        const numCircles = 15; // 圆形数量
+    initGrid() {
+        this.points = [];
         
-        for (let i = 0; i < numCircles; i++) {
-            const size = Math.random() * 100 + 50; // 50-150px的随机大小
-            this.circles.push({
-                x: Math.random() * this.canvas.width,
-                y: Math.random() * this.canvas.height,
-                radius: size,
-                color: this.colors[Math.floor(Math.random() * this.colors.length)],
-                speedX: (Math.random() - 0.5) * 2,
-                speedY: (Math.random() - 0.5) * 2,
-                rotation: 0,
-                rotationSpeed: (Math.random() - 0.5) * 0.02,
-                pattern: Math.floor(Math.random() * 3) // 0: 圆形, 1: 同心圆, 2: 点阵
-            });
+        // 计算网格的起始位置，使其居中
+        const startX = (this.canvas.width % this.gridSize) / 2;
+        const startY = (this.canvas.height % this.gridSize) / 2;
+        
+        // 创建网格点
+        for (let x = startX; x < this.canvas.width; x += this.gridSize) {
+            for (let y = startY; y < this.canvas.height; y += this.gridSize) {
+                // 确保点不会太靠近边缘
+                if (x >= this.gridSize && x <= this.canvas.width - this.gridSize &&
+                    y >= this.gridSize && y <= this.canvas.height - this.gridSize) {
+                    this.points.push({
+                        x: x,
+                        y: y,
+                        originalX: x,
+                        originalY: y,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
         }
     }
 
-    drawPattern(circle) {
-        const { x, y, radius, color, rotation, pattern } = circle;
-        
-        this.ctx.save();
-        this.ctx.translate(x, y);
-        this.ctx.rotate(rotation);
-        
-        switch(pattern) {
-            case 0: // 实心圆带边框
-                this.ctx.beginPath();
-                this.ctx.arc(0, 0, radius, 0, Math.PI * 2);
-                this.ctx.fillStyle = color;
-                this.ctx.fill();
-                this.ctx.strokeStyle = '#000000';
-                this.ctx.lineWidth = 4;
-                this.ctx.stroke();
-                break;
-                
-            case 1: // 同心圆
-                for (let i = radius; i > 0; i -= 20) {
-                    this.ctx.beginPath();
-                    this.ctx.arc(0, 0, i, 0, Math.PI * 2);
-                    this.ctx.strokeStyle = i % 40 === 0 ? color : '#000000';
-                    this.ctx.lineWidth = 4;
-                    this.ctx.stroke();
-                }
-                break;
-                
-            case 2: // 点阵图案
-                const dotSize = 8;
-                const spacing = 20;
-                for (let dx = -radius; dx < radius; dx += spacing) {
-                    for (let dy = -radius; dy < radius; dy += spacing) {
-                        if (dx * dx + dy * dy <= radius * radius) {
-                            this.ctx.beginPath();
-                            this.ctx.arc(dx, dy, dotSize, 0, Math.PI * 2);
-                            this.ctx.fillStyle = color;
-                            this.ctx.fill();
-                        }
-                    }
-                }
-                break;
-        }
-        
-        this.ctx.restore();
-    }
-
-    animate() {
-        // 创建半透明黑色背景，产生轨迹效果
+    draw() {
+        // 清除画布
         this.ctx.fillStyle = 'rgba(10, 10, 10, 0.1)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // 更新和绘制所有图案
-        this.circles.forEach(circle => {
-            // 更新位置
-            circle.x += circle.speedX;
-            circle.y += circle.speedY;
-            circle.rotation += circle.rotationSpeed;
+        const centerX = this.canvas.width / 2;
+        const centerY = this.canvas.height / 2;
+        const time = Date.now() * 0.001;
 
-            // 边界检查
-            if (circle.x < -circle.radius) circle.x = this.canvas.width + circle.radius;
-            if (circle.x > this.canvas.width + circle.radius) circle.x = -circle.radius;
-            if (circle.y < -circle.radius) circle.y = this.canvas.height + circle.radius;
-            if (circle.y > this.canvas.height + circle.radius) circle.y = -circle.radius;
+        this.points.forEach(point => {
+            // 添加轻微的动态效果
+            const offsetX = Math.sin(time + point.phase) * 2;
+            const offsetY = Math.cos(time + point.phase) * 2;
+            point.x = point.originalX + offsetX;
+            point.y = point.originalY + offsetY;
 
-            // 绘制图案
-            this.drawPattern(circle);
+            // 绘制点
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            this.ctx.fillRect(point.x - 1.5, point.y - 1.5, 3, 3);
+
+            // 绘制连接线
+            this.ctx.beginPath();
+            this.ctx.moveTo(point.x, point.y);
+            this.ctx.lineTo(centerX, centerY);
+            this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            this.ctx.stroke();
         });
 
+        // 绘制中心点
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        this.ctx.fillRect(centerX - 1.5, centerY - 1.5, 3, 3);
+    }
+
+    animate() {
+        this.draw();
         requestAnimationFrame(() => this.animate());
     }
 }

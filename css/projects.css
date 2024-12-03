@@ -50,96 +50,76 @@
     padding: 20px 0;
 }
 
-/* 项目卡片样式 */
+/* 项目卡片样式统一 */
 .project-card {
-    background: var(--secondary-color);
-    border-radius: 10px;
-    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
     transition: transform 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-/* 项目卡片悬停效果 */
 .project-card:hover {
     transform: translateY(-5px);
 }
 
-/* 项目图片容器样式 */
-.project-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-/* 项目图片样式 */
-.project-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 项目链接覆盖层样式 */
-.project-links {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+.project-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 显示项目链接 */
-.project-card:hover .project-links {
-    opacity: 1;
-}
-
-/* 项目链接图标样式 */
-.project-link {
-    color: white;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-}
-
-/* 项目链接图标悬停效果 */
-.project-link:hover {
-    transform: scale(1.2);
-}
-
-/* 项目信息区域样式 */
-.project-info {
-    padding: 20px;
-}
-
-/* 项目标题样式 */
-.project-info h3 {
+.project-header h3 {
+    font-size: 1.2rem;
     color: var(--primary-color);
-    margin-bottom: 10px;
 }
 
-/* 项目描述样式 */
-.project-info p {
-    margin-bottom: 15px;
+.project-date {
+    color: #aaa;
     font-size: 0.9rem;
 }
 
-/* 项目标签容器样式 */
+.project-tech {
+    margin-bottom: 1.5rem;
+}
+
+.tech-item {
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.tech-item strong {
+    color: #fff;
+    margin-right: 0.5rem;
+    font-weight: normal;
+}
+
+.tech-item span {
+    color: #aaa;
+}
+
+.project-description p {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
 .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
 }
 
-/* 单个标签样式 */
 .tag {
-    background: rgba(108, 99, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     color: var(--primary-color);
-    padding: 4px 12px;
-    border-radius: 15px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
     font-size: 0.8rem;
 }
 

@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简历 - Sanuei</title>
+    <title>个人简历 - Sanuei</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/resume.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -12,7 +14,7 @@
     <!-- 导航栏部分与index.html相同 -->
     <nav class="navbar">
         <div class="nav-brand">
-            <a href="index.html">Sanuei</a>
+            <a href="index.html">Yan_Sanuei</a>
         </div>
         <div class="nav-toggle" id="navToggle">
             <i class="fas fa-bars"></i>
@@ -22,79 +24,148 @@
             <li><a href="resume.html">简历</a></li>
             <li><a href="projects.html">项目</a></li>
             <li><a href="github.html">GitHub</a></li>
+            <li class="language-dropdown">
+                <a href="#" class="language-btn">
+                    <i class="fas fa-globe"></i>
+                </a>
+                <div class="language-menu">
+                    <a href="#" data-lang="zh" class="active">中文</a>
+                    <a href="#" data-lang="en">English</a>
+                    <a href="#" data-lang="ja">日本語</a>
+                </div>
+            </li>
         </ul>
     </nav>
 
     <main class="resume-container">
         <section class="resume-header">
-            <h1>个人简历</h1>
-            <div class="download-btn">
-                <a href="#" class="btn primary"><i class="fas fa-download"></i> 下载PDF版本</a>
-            </div>
-        </section>
-
-        <section class="resume-section">
-            <h2><i class="fas fa-user"></i> 个人信息</h2>
-            <div class="info-grid">
-                <div class="info-item">
-                    <strong>姓名：</strong> Sanuei
+            <div class="profile-info">
+                <div class="name-block">
+                    <h1>
+                        <div class="name-row">
+                            <span class="surname" data-i18n="surname">楊</span>
+                            <span class="firstname" data-i18n="firstname">尚衛</span>
+                        </div>
+                        <div class="name-phonetic">
+                            <span data-i18n="surname-phonetic">ヤン</span>
+                            <span data-i18n="firstname-phonetic">サンウエイ</span>
+                        </div>
+                    </h1>
                 </div>
-                <div class="info-item">
-                    <strong>职位：</strong> 全栈开发工程师
-                </div>
-                <div class="info-item">
-                    <strong>邮箱：</strong> your.email@example.com
-                </div>
-                <div class="info-item">
-                    <strong>地点：</strong> 城市，国家
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> sanuei.yann@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 080-4910-8323</p>
+                    <p><i class="fab fa-weixin"></i> 08049108323</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="address">東京都江戸川区一之江</span></p>
                 </div>
             </div>
         </section>
 
         <section class="resume-section">
-            <h2><i class="fas fa-code"></i> 技术技能</h2>
+            <h2><i class="fas fa-graduation-cap"></i> <span data-i18n="education">学历背景</span></h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="date">2022.10 - <span data-i18n="present">现在</span></div>
+                    <div class="content">
+                        <h3 data-i18n="school-1">大原日本語学院</h3>
+                        <p data-i18n="major-1">日语学习</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2016.09 - 2020.07</div>
+                    <div class="content">
+                        <h3 data-i18n="school-2">南京藝術學院</h3>
+                        <p data-i18n="major-2">媒体设计专业</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="resume-section">
+            <h2><i class="fas fa-briefcase"></i> <span data-i18n="workExperience">工作经历</span></h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="date">2024.09 - <span data-i18n="present">现在</span></div>
+                    <div class="content">
+                        <h3 data-i18n="company-1">(株)名川ネットワーク</h3>
+                        <p data-i18n="position-1">Web开发工程师</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2023.10 - 2024.08</div>
+                    <div class="content">
+                        <h3>(株)Great Navigation</h3>
+                        <p>Web开发工程师</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2020.10 - 2021.10</div>
+                    <div class="content">
+                        <h3>南京德基廣場有限公司</h3>
+                        <p>媒体设计师</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="resume-section">
+            <h2><i class="fas fa-code"></i> <span data-i18n="skills">技术技能</span></h2>
             <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 data-i18n="backend">后端开发</h3>
+                    <div class="skill-tags">
+                        <span class="tag">JAVA</span>
+                        <span class="tag">Springboot</span>
+                        <span class="tag">Struts</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Oracle</span>
+                    </div>
+                </div>
                 <div class="skill-category">
                     <h3>前端开发</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Vue.js</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Vue</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>后端开发</h3>
+                    <h3>AI工具</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">MySQL</span>
+                        <span class="tag">ChatGPT</span>
+                        <span class="tag">Cursor</span>
+                        <span class="tag">Notion AI</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>设计技能</h3>
+                    <div class="skill-tags">
+                        <span class="tag">グラフィックデザイン</span>
+                        <span class="tag">ビデオ編集</span>
+                        <span class="tag">撮影</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="resume-section">
-            <h2><i class="fas fa-briefcase"></i> 工作经历</h2>
-            <div class="experience-item">
-                <h3>高级开发工程师</h3>
-                <p class="company">XX科技有限公司 | 2020 - 至今</p>
-                <ul class="experience-details">
-                    <li>负责公司核心产品的架构设计和开发</li>
-                    <li>带领5人团队完成多个重要项目</li>
-                    <li>优化系统性能，提升用户体验</li>
-                </ul>
+            <h2><i class="fas fa-certificate"></i> <span data-i18n="certificates">资格证书</span></h2>
+            <div class="certificates">
+                <div class="certificate">
+                    <i class="fas fa-award"></i>
+                    <h3>JLPT N2</h3>
+                    <p data-i18n="jlpt-n2-desc">日语能力测试二级</p>
+                </div>
             </div>
         </section>
 
         <section class="resume-section">
-            <h2><i class="fas fa-graduation-cap"></i> 教育背景</h2>
-            <div class="education-item">
-                <h3>计算机科学与技术</h3>
-                <p class="school">XX大学 | 2016 - 2020</p>
-                <p>学士学位 | GPA: 3.8/4.0</p>
+            <h2><i class="fas fa-user"></i> <span data-i18n="selfIntro">自我介绍</span></h2>
+            <div class="self-introduction">
+                <p data-i18n="intro-p1">我是一名热爱学习的开发者，拥有媒体设计背景和Web开发经验。通过不断学习和实践，我掌握了全栈开发所需的各种技能。我相信只要有努力和热情，在任何领域都能取得进步。</p>
+                <p data-i18n="intro-p2">8年的滑板经历教会我坚持和专注的重要性，同时也帮助我建立了广泛的人际网络，丰富了我的人生经验。</p>
             </div>
         </section>
     </main>
@@ -102,13 +173,15 @@
     <!-- 页脚部分与index.html相同 -->
     <footer>
         <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/Sanuei" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="https://www.youtube.com/@sonicyann" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/sonic_yann/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com/yngshngwi6" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
         </div>
         <p>&copy; 2024 Sanuei. All rights reserved.</p>
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/i18n.js"></script>
 </body>
 </html> 
