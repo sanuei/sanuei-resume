@@ -47,8 +47,8 @@
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px 0;
+    gap: 1.5rem;
+    padding: 1rem 0;
 }
 
 /* 项目卡片样式统一 */
@@ -68,21 +68,26 @@
 .project-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .project-header h3 {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
     color: var(--primary-color);
+    flex: 1;
+    min-width: 200px;
 }
 
 .project-date {
     color: #aaa;
     font-size: var(--font-size-sm);
+    white-space: nowrap;
 }
 
 .project-tech {
@@ -131,6 +136,39 @@
     .projects-grid {
         grid-template-columns: 1fr; /* 移动端单列显示 */
     }
+
+    .project-card {
+        padding: 1rem;  /* 减小内边距 */
+    }
+
+    .project-header {
+        flex-direction: column;  /* 标题和日期垂直排列 */
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .project-header h3 {
+        margin-bottom: 0.2rem;
+    }
+
+    .project-tech {
+        margin-bottom: 1rem;
+    }
+
+    .tech-item {
+        margin-bottom: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+    }
+
+    .tech-item strong {
+        min-width: 60px;  /* 确保标签对齐 */
+    }
+
+    .project-image {
+        height: 160px;  /* 减小图片高度 */
+    }
 }
 
 /* 项目图片容器样式 */
@@ -152,4 +190,17 @@
 /* 鼠标悬停时的图片放大效果 */
 .project-image:hover img {
     transform: scale(1.05);
+}
+
+/* 确保最新的项目显示在最前面 */
+.project-card:nth-child(1) {
+    order: 1;
+}
+
+.project-card:nth-child(2) {
+    order: 2;
+}
+
+.project-card:nth-child(3) {
+    order: 3;
 } 

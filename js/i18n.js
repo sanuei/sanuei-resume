@@ -28,7 +28,7 @@ const translations = {
         'school-1': '大原日本语学院',
         'major-1': '日语学习',
         'school-2': '南京艺术学院',
-        'major-2': '媒体设计专业',
+        'major-2': '数字媒体艺术',
         'company-1': '(株)名川ネットワーク',
         'position-1': 'Web开发工程师',
         'backend': '后端开发',
@@ -38,8 +38,6 @@ const translations = {
         'jlpt-n2-desc': '日语能力测试二级',
         'intro-p1': '作为全栈开发工程师，我精通从Java/SpringBoot后端开发到HTML/CSS/JavaScript前端开发的全面技术栈。',
         'intro-p2': '对AI技术有浓厚兴趣，积极运用ChatGPT和GitHub Copilot等最新AI工具，提高开发效率和代码质量。',
-        'intro-p3': '在团队开发中，熟练使用Git和SVN进行版本管理，实践敏捷开发方法，为项目高效推进做出贡献。',
-        'intro-p4': '保持对新技术的探索精神，通过持续学习提升技术能力。特别关注云计算和微服务架构，正在准备AWS认证。',
 
         // GitHub页面
         'repositories': '仓库数量',
@@ -92,7 +90,7 @@ const translations = {
         'project3-title': 'Java编程培训项目',
         
         'environment': '开发环境',
-        'language': '开发语言',
+        'language': '开发语��',
         'frontend': '前端技术',
         'tools': '开发工具',
         
@@ -114,7 +112,7 @@ const translations = {
         'school1': '大原日本语学院',
         'major1': '日语学习',
         'school2': '南京艺术学院',
-        'major2': '媒体设计专业',
+        'major2': '数字媒体艺术',
         
         'company1': '名川网络株式会社',
         'position1': 'Web开发工程师',
@@ -133,7 +131,8 @@ const translations = {
         'position3': '媒体设计师',
         'graphic-design': '平面设计',
         'video-editing': '视频编辑',
-        'photography': '摄影'
+        'photography': '摄影',
+        'study-period': '2022.10 - 2023.10'
     },
     en: {
         // Navigation
@@ -228,7 +227,7 @@ const translations = {
         'school1': 'O-HARA Japanese Language School',
         'major1': 'Japanese Language Studies',
         'school2': 'Nanjing University of the Arts',
-        'major2': 'Media Design',
+        'major2': 'Digital Media Arts',
         
         'company1': 'Nagawa Network Co., Ltd.',
         'position1': 'Web Developer',
@@ -250,8 +249,7 @@ const translations = {
         'photography': 'Photography',
         'intro-p1': 'As a full-stack developer, I am proficient in a comprehensive technology stack from Java/SpringBoot backend development to HTML/CSS/JavaScript frontend development.',
         'intro-p2': 'With a strong interest in AI technology, I actively utilize the latest AI tools such as ChatGPT and GitHub Copilot to improve development efficiency and code quality.',
-        'intro-p3': 'In team development, I am skilled in version control using Git and SVN, practicing agile development methodologies to contribute to efficient project progression.',
-        'intro-p4': 'Maintaining a spirit of exploration for new technologies, I continuously improve my technical capabilities through ongoing learning. Particularly interested in cloud computing and microservice architecture, currently preparing for AWS certification.'
+        'study-period': '2022.10 - 2023.10'
     },
     ja: {
         // ナビゲーション
@@ -346,7 +344,7 @@ const translations = {
         'school1': '大原日本語学院',
         'major1': '日本語学習',
         'school2': '南京芸術学院',
-        'major2': 'メディアデザイン',
+        'major2': 'メジタルメディアアート',
         
         'company1': '株式会社名川ネットワーク',
         'position1': 'Webエンジニア',
@@ -368,8 +366,7 @@ const translations = {
         'photography': '撮影',
         'intro-p1': 'フルスタック開発者として、Java/SpringBootを中心としたバックエンド開発から、HTML/CSS/JavaScriptによるフロントエンド開発まで、幅広い技術スタックを持っています。',
         'intro-p2': 'AI技術に強い関心を持ち、ChatGPTやGitHub Copilotなどの最新のAIツールを積極的に活用し、開発効率の向上とコード品質の改善に取り組んでいます。',
-        'intro-p3': 'チーム開発においては、GitやSVNを用いたバージョン管理、アジャイル開発手法を実践し、効率的なプロジェクト進行に貢献してきました。',
-        'intro-p4': '新しい技術への探究心を持ち、継続的な学習を通じて技術力の向上に努めています。特に、クラウドコンピューティングやマイクロサービスアーキテクチャに関心があり、AWS認定資格の取得を目指しています。'
+        'study-period': '2022.10 - 2023.10'
     }
 };
 
@@ -391,7 +388,7 @@ function translate(lang) {
         }
     });
     
-    // 更新语言选择器的激活状态
+    // 更新言选择器的激活状态
     document.querySelectorAll('.language-menu a').forEach(link => {
         link.classList.toggle('active', link.getAttribute('data-lang') === lang);
     });

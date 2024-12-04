@@ -46,6 +46,8 @@
 
 .contact-info i {
     color: var(--primary-color);
+    width: 20px;
+    text-align: center;
 }
 
 /* 简历部分通用样式 */
@@ -173,6 +175,7 @@
 @media (max-width: 768px) {
     .timeline-item {
         flex-direction: column;
+        align-items: flex-start;
     }
     
     .timeline-item .date {
@@ -181,13 +184,56 @@
     
     .contact-info {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        gap: 0.8rem;
+        padding-left: 1rem;
+    }
+
+    .contact-info p {
+        width: 100%;
+        font-size: var(--font-size-sm);
+    }
+
+    .name-block {
+        text-align: left;
+        padding-left: 1rem;
+    }
+
+    .name-row, .name-phonetic {
+        justify-content: flex-start;
+    }
+
+    .resume-header {
+        padding: 1.5rem;
+    }
+
+    .resume-section {
+        padding: 1rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr; /* 单列显示 */
+    }
+
+    .certificates {
+        grid-template-columns: 1fr; /* 单列显示 */
     }
 } 
 
+/* 超小屏幕适配 */
+@media (max-width: 360px) {
+    .contact-info {
+        padding-left: 0.5rem;
+    }
+
+    .name-block {
+        padding-left: 0.5rem;
+    }
+}
+
 /* 更新姓名块样式 */
 .name-block {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     text-align: center;
 }
 
@@ -199,20 +245,20 @@
 .name-row {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    font-size: var(--font-size-3xl);
-    margin-bottom: 0.5rem;
+    gap: 0.8rem;
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem;
     color: var(--text-color);
 }
 
 .name-phonetic {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    font-size: var(--font-size-base);
+    gap: 0.8rem;
+    font-size: 0.9rem;
     color: var(--text-color);
     opacity: 0.8;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 /* 语言切换按钮样式 */
@@ -345,4 +391,15 @@
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
     color: var(--primary-color);
+} 
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .name-row {
+        font-size: 2rem;
+    }
+
+    .name-phonetic {
+        font-size: 0.8rem;
+    }
 } 

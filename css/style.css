@@ -31,6 +31,9 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 /* 导航栏样式 */
@@ -46,14 +49,54 @@ body {
     z-index: 1000; /* 确保导航栏始终在最上层 */
 }
 
+/* 导入Google字体 */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@400;600;700&display=swap');
+
 /* 网站品牌样式 */
 .nav-brand a {
-    color: var(--primary-color);
+    font-family: 'Orbitron', sans-serif;  /* 改用 Orbitron 字体 */
+    font-size: 1.8rem;
+    font-weight: 700;  /* 使用粗体 */
+    background: linear-gradient(45deg, #6C63FF, #8A8AFF, #6C63FF);  /* 更丰富的渐变 */
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-decoration: none;
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.05em;
+    position: relative;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;  /* 增加字间距 */
+    text-transform: uppercase;  /* 转换为大写 */
+    animation: gradient 3s linear infinite;  /* 添加渐变动画 */
+}
+
+/* 添加渐变动画 */
+@keyframes gradient {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+.nav-brand a:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px rgba(108, 99, 255, 0.6);  /* 增强光晕效果 */
+}
+
+/* 添加下划线动画效果 */
+.nav-brand a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;  /* 调整下划线位置 */
+    left: 0;
+    width: 0;
+    height: 3px;  /* 增加下划线粗细 */
+    background: linear-gradient(90deg, #6C63FF, #8A8AFF);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(108, 99, 255, 0.8);  /* 增强发光效果 */
+    border-radius: 2px;  /* 圆角下划线 */
+}
+
+.nav-brand a:hover::after {
+    width: 100%;
 }
 
 /* 移动端菜单按钮样式 */
@@ -100,20 +143,22 @@ body {
 /* 英雄区域样式 */
 .hero {
     position: relative;
-    height: 100vh; /* 全屏高度 */
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 0 1rem;
+    overflow: hidden;
 }
 
 /* 英雄区域内容样式 */
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: 2rem 2.5rem;  /* 进一步减小内边距 */
-    max-width: 500px;      /* 减小最大宽度 */
+    padding: 2rem 2.5rem;
+    max-width: 500px;
     margin: 0 auto;
     background: rgba(10, 10, 10, 0.6);
     border-radius: 20px;
@@ -121,29 +166,41 @@ body {
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;  /* 添加文字居中对齐 */
 }
 
 .hero-content h1 {
+    font-family: 'Orbitron', sans-serif;
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    margin-bottom: 0.8rem; /* 减小下边距 */
-    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;  /* 增加底部间距 */
+    letter-spacing: 0.05em;
     line-height: 1.2;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #6C63FF, #8A8AFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;  /* 确保标题居中 */
+    width: 100%;  /* 确保标题占满容器宽度 */
 }
 
 .hero-content p {
+    font-family: 'Rajdhani', sans-serif;  /* 使用 Rajdhani 字体作为副标题 */
     font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-normal);
-    margin-bottom: 0.4rem; /* 减小段落间距 */
+    font-weight: 600;  /* 稍微加粗 */
+    margin-bottom: 0.4rem;
     color: var(--text-color);
     opacity: 0.9;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.03em;  /* 适当的字间距 */
 }
 
 /* 高亮文本样式 */
 .highlight {
+    font-family: 'Orbitron', sans-serif;  /* 高亮文本使用 Orbitron */
     color: var(--primary-color);
     font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
 /* 按钮基础样式 */
@@ -154,8 +211,12 @@ body {
     border-radius: 5px;
     text-decoration: none;
     transition: all 0.3s ease;
-    font-weight: 500;
-    text-shadow: none; /* 移除按钮文字阴影 */
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-base);
+    font-family: 'Rajdhani', sans-serif;  /* 按钮也使用 Rajdhani */
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;  /* 按钮文字大写 */
 }
 
 .btn:hover {
@@ -266,15 +327,27 @@ footer {
         --font-size-2xl: 1.375rem; /* 22px */
         --font-size-xl: 1.125rem;  /* 18px */
     }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 #heroCanvas {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: 1;
+    margin: 0;
+    padding: 0;
 }
 
 .hero-content {
@@ -376,4 +449,81 @@ footer {
 .language-btn i {
     font-size: 1rem; /* 确保图标大小与文字一致 */
     line-height: 1;
+}
+
+/* 移动端按钮样式优化 */
+@media (max-width: 768px) {
+    .btn {
+        padding: 0.6rem 1.2rem;  /* 减小内边距 */
+        margin: 0.3rem;          /* 减小外边距 */
+        font-size: var(--font-size-sm);  /* 减小字体大小 */
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);  /* 减小悬停效果 */
+        box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+    }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 360px) {
+    .btn {
+        padding: 0.5rem 1rem;    /* 进一步减小内边距 */
+        font-size: var(--font-size-xs);  /* 进一步减小字体 */
+    }
+}
+
+/* 修改 CTA 按钮的样式 */
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    width: 100%;  /* 确保按钮容器占满宽度 */
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    height: 45px;
+    padding: 0 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+    flex: 1;  /* 让按钮平均分配空间 */
+    max-width: 200px;  /* 限制最大宽度 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: column;
+        gap: 15px;  /* 减小按钮之间的间距 */
+    }
+    
+    .btn {
+        width: 100%;
+        min-width: 200px;
+        height: 40px;  /* 移动端稍微降低按钮高度 */
+    }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 360px) {
+    .btn {
+        height: 36px;  /* 更小屏幕进一步降低按钮高度 */
+        min-width: 160px;  /* 减小最小宽度 */
+    }
 } 
