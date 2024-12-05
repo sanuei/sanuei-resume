@@ -98,7 +98,7 @@ body {
     background: linear-gradient(90deg, #6C63FF, #8A8AFF);
     transition: width 0.3s ease;
     box-shadow: 0 0 10px rgba(108, 99, 255, 0.8);  /* 增强发光效果 */
-    border-radius: 2px;  /* 圆角下��线 */
+    border-radius: 2px;  /* 圆角下线 */
 }
 
 .nav-brand a:hover::after {
@@ -223,6 +223,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;  /* 按钮文字大写 */
+    white-space: nowrap;  /* 防止文字换行 */
 }
 
 .btn:hover {
@@ -423,6 +424,9 @@ footer {
         transform: none;
         box-shadow: none;
         padding: 0;
+        display: flex;  /* 改为水平排列 */
+        justify-content: center;  /* 水平居中 */
+        width: 100%;
     }
 
     .language-dropdown {
@@ -432,6 +436,9 @@ footer {
     .language-menu a {
         padding: 1rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex: 1;  /* 平均分配空间 */
+        text-align: center;  /* 文字居中 */
+        max-width: 120px;  /* 限制最大宽度 */
     }
 }
 
@@ -462,7 +469,7 @@ footer {
     .btn {
         padding: 0.6rem 1.2rem;  /* 减小内边距 */
         margin: 0.3rem;          /* 减小外边距 */
-        font-size: var(--font-size-sm);  /* 减小字体大小 */
+        font-size: var(--font-size-sm);  /* 小字体大小 */
     }
 
     .cta-buttons {
@@ -512,6 +519,37 @@ footer {
     max-width: 200px;  /* 限制最大宽度 */
 }
 
+
+
+
+
+/* 修改 CTA 按钮的样式 */
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    width: 100%;  /* 确保按钮容器占满宽度 */
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    height: 45px;
+    padding: 0 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+    flex: 1;  /* 让按钮平均分配空间 */
+    max-width: 200px;  /* 限制最大宽度 */
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .cta-buttons {
@@ -526,10 +564,158 @@ footer {
     }
 }
 
+
+
+.hero-buttons .btn {
+    padding: 12px 28px; /* 增加上下内边距 */
+    font-size: 1.1rem;
+    border-radius: 6px;
+    min-height: 48px; /* 确保最小高度 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+/* 移动端基础适配 */
+@media (max-width: 768px) {
+    /* 导航栏移动端样式 */
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--secondary-color);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+
+    /* 语言切换器移动端样式 */
+    .language-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: 0;
+        display: flex;  /* 改为水平排列 */
+        justify-content: center;  /* 水平居中 */
+        width: 100%;
+    }
+
+    .language-dropdown {
+        width: 100%;
+    }
+
+    .language-menu a {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex: 1;  /* 平均分配空间 */
+        text-align: center;  /* 文字居中 */
+        max-width: 120px;  /* 限制最大宽度 */
+    }
+
+    /* 英雄区域移动端样式 */
+    .hero-content {
+        padding: 1.5rem;
+        margin: 0 1rem;
+        max-width: 400px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    /* 按钮移动端样式 */
+    .hero-buttons, .cta-buttons {
+        flex-direction: row;
+        gap: 15px;
+        margin-top: 2rem;
+        padding: 0 15px;
+    }
+
+    .btn {
+        flex: 1;
+        min-width: 0;
+        height: 48px;
+        padding: 0 20px;
+        font-size: 1rem;
+        max-width: none;
+    }
+}
+
 /* 超小屏幕适配 */
 @media (max-width: 360px) {
+    /* 英雄区域超小屏幕样式 */
+    .hero-content {
+        padding: 1rem;
+        margin: 0 0.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-content p {
+        font-size: 0.85rem;
+    }
+
+    /* 按钮超小屏幕样式 */
+    .hero-buttons, .cta-buttons {
+        gap: 10px;
+        padding: 0 10px;
+    }
+
     .btn {
-        height: 36px;  /* 更小屏幕进一步降低按钮高度 */
-        min-width: 160px;  /* 减小��小宽度 */
+        height: 46px;
+        padding: 0 15px;
+        font-size: 0.95rem;
+    }
+
+    /* 导航栏超小屏幕样式 */
+    .nav-brand a {
+        font-size: 1.5rem;
+    }
+
+    .nav-links li a {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 确保移动端按钮文字也不换行 */
+@media (max-width: 768px) {
+    .btn {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 } 
