@@ -157,57 +157,109 @@ class GitHubUI {
     showLoading() {
         const repoGrid = document.getElementById('repoGrid');
         repoGrid.innerHTML = `
-            <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>正在加载数据...</p>
+            <div class="col-span-full flex flex-col items-center justify-center py-12 loading">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+                <p class="text-gray-400">正在加载仓库数据...</p>
             </div>
         `;
     }
 
     updateProfile(profile) {
         // 更新个人信息显示
-        document.querySelector('.profile-info h1').textContent = profile.name || profile.login;
-        document.querySelector('.profile-bio').textContent = profile.bio || 'Full Stack Developer';
+        const nameElement = document.querySelector('h2[data-i18n="githubName"]');
+        const bioElement = document.querySelector('.profile-bio');
+        
+        if (nameElement) {
+            nameElement.textContent = profile.name || profile.login;
+        }
+        if (bioElement) {
+            bioElement.textContent = profile.bio || 'Full Stack Developer';
+        }
         
         // 更新统计数据
-        document.getElementById('followers').textContent = profile.followers;
-        document.getElementById('following').textContent = profile.following;
-        document.getElementById('publicRepos').textContent = profile.public_repos;
+        const followersEl = document.getElementById('followers');
+        const followingEl = document.getElementById('following');
+        const publicReposEl = document.getElementById('publicRepos');
+        
+        if (followersEl) followersEl.textContent = profile.followers;
+        if (followingEl) followingEl.textContent = profile.following;
+        if (publicReposEl) publicReposEl.textContent = profile.public_repos;
     }
 
     updateStats(profile, repos) {
         // 更新统计卡片
-        document.getElementById('repoCount').textContent = profile.public_repos;
+        const repoCountEl = document.getElementById('repoCount');
+        const totalStarsEl = document.getElementById('totalStars');
+        const topLanguageEl = document.getElementById('topLanguage');
+        
+        if (repoCountEl) {
+            repoCountEl.textContent = profile.public_repos;
+        }
         
         const totalStars = repos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-        document.getElementById('totalStars').textContent = totalStars;
+        if (totalStarsEl) {
+            totalStarsEl.textContent = totalStars;
+        }
 
         const languages = repos.map(repo => repo.language).filter(Boolean);
         const topLanguage = this.getMostFrequent(languages);
-        document.getElementById('topLanguage').textContent = topLanguage || 'N/A';
+        if (topLanguageEl) {
+            topLanguageEl.textContent = topLanguage || 'JavaScript';
+        }
     }
 
     updateRepositories(repos) {
         const repoGrid = document.getElementById('repoGrid');
         if (repos.length === 0) {
-            repoGrid.innerHTML = `<p class="no-repos" data-i18n="noRepos">暂无公开仓库</p>`;
+            repoGrid.innerHTML = `
+                <div class="col-span-full text-center py-12">
+                    <p class="text-gray-400" data-i18n="noRepos">暂无公开仓库</p>
+                </div>
+            `;
             return;
         }
 
         repoGrid.innerHTML = repos.map(repo => this.createRepoCard(repo)).join('');
         // 更新完DOM后重新应用翻译
+        if (typeof translate === 'function' && typeof currentLang !== 'undefined') {
         translate(currentLang);
+        }
     }
 
     createRepoCard(repo) {
         return `
-            <div class="repo-card">
-                <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
-                <p>${repo.description || '暂无描述'}</p>
-                <div class="repo-stats">
-                    <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
-                    <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
-                    ${repo.language ? `<span><i class="fas fa-circle"></i> ${repo.language}</span>` : ''}
+            <div class="repo-card bg-dark/30 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-primary/30 transition-all duration-300">
+                <div class="flex items-start justify-between mb-4">
+                    <h3 class="text-lg font-semibold">
+                        <a href="${repo.html_url}" target="_blank" rel="noopener" 
+                           class="text-white hover:text-primary transition-colors duration-300 flex items-center">
+                            ${repo.name}
+                            <i class="fas fa-external-link-alt ml-2 text-sm opacity-60"></i>
+                        </a>
+                    </h3>
+                    ${repo.language ? `
+                        <span class="px-2 py-1 bg-primary/20 text-primary text-xs rounded-full border border-primary/30">
+                            ${repo.language}
+                        </span>
+                    ` : ''}
+                </div>
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">
+                    ${repo.description || '<span data-i18n="noDescription">暂无描述</span>'}
+                </p>
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                    <div class="flex items-center space-x-4">
+                        <span class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            ${repo.stargazers_count}
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fas fa-code-branch text-blue-400 mr-1"></i>
+                            ${repo.forks_count}
+                        </span>
+                    </div>
+                    <span class="text-xs text-gray-500">
+                        ${new Date(repo.updated_at).toLocaleDateString('zh-CN')}
+                    </span>
                 </div>
             </div>
         `;
@@ -223,16 +275,22 @@ class GitHubUI {
     showError() {
         const repoGrid = document.getElementById('repoGrid');
         repoGrid.innerHTML = `
-            <div class="error-message">
-                <i class="fas fa-exclamation-circle"></i>
-                <p data-i18n="error">获取GitHub数据时出错，请稍后再试。</p>
-                <button onclick="location.reload()" class="retry-btn">
-                    <i class="fas fa-sync"></i> <span data-i18n="retry">重试</span>
+            <div class="col-span-full flex flex-col items-center justify-center py-12">
+                <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-exclamation-circle text-red-400 text-2xl"></i>
+                </div>
+                <p class="text-gray-400 mb-4" data-i18n="error">获取GitHub数据时出错，请稍后再试。</p>
+                <button onclick="location.reload()" 
+                        class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/80 text-white rounded-lg transition-colors duration-300">
+                    <i class="fas fa-sync mr-2"></i> 
+                    <span data-i18n="retry">重试</span>
                 </button>
             </div>
         `;
         // 更新完DOM后重新应用翻译
+        if (typeof translate === 'function' && typeof currentLang !== 'undefined') {
         translate(currentLang);
+        }
     }
 }
 

@@ -1,82 +1,250 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" class="scroll-smooth">
 <head>
     <!-- 基本元数据 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanuei个人网站</title>
     
-    <!-- 预加载字体以提高性能 -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#06b6d4',
+                        dark: '#0f172a',
+                        'dark-light': '#1e293b',
+                    },
+                    fontFamily: {
+                        'display': ['Orbitron', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- 样式表引入 -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Font Awesome 图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 自定义样式 -->
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+            to { box-shadow: 0 0 30px rgba(99, 102, 241, 0.8); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-dark via-slate-900 to-dark-light text-white font-body">
     <!-- 导航栏 -->
-    <nav class="navbar">
-        <!-- 网站品牌/Logo -->
-        <div class="nav-brand">
-            <a href="index.html">SONIC_YANN</a>
-        </div>
-        <!-- 移动端菜单按钮 -->
-        <div class="nav-toggle" id="navToggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        <!-- 导航链接 -->
-        <ul class="nav-links">
-            <li><a href="index.html" data-i18n="home">首页</a></li>
-            <li><a href="resume.html" data-i18n="resume">简历</a></li>
-            <li><a href="projects.html" data-i18n="projects">项目</a></li>
-            <li><a href="github.html" data-i18n="github">GitHub</a></li>
-            <li class="language-dropdown">
-                <a href="#" class="language-btn">
-                    <i class="fas fa-globe"></i>
-                </a>
-                <div class="language-menu">
-                    <a href="#" data-lang="zh" class="active">中文</a>
-                    <a href="#" data-lang="en">English</a>
-                    <a href="#" data-lang="ja">日本語</a>
+    <nav class="fixed top-0 w-full z-50 bg-dark/80 glass-effect border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- 品牌 Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-display font-bold gradient-text hover:scale-105 transition-transform duration-300">
+                        SONIC_YANN
+                    </a>
                 </div>
-            </li>
-        </ul>
+                
+                <!-- 桌面端导航 -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-white hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="home">首页</a>
+                        <a href="resume.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="resume">简历</a>
+                        <a href="projects.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="projects">项目</a>
+                        <a href="github.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="github">GitHub</a>
+                        
+                        <!-- 语言切换 -->
+                        <div class="relative language-dropdown">
+                            <button class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium language-btn">
+                                <i class="fas fa-globe mr-1"></i>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <div class="language-menu absolute right-0 mt-2 w-32 bg-dark-light rounded-md shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible transition-all duration-300">
+                                <div class="py-1">
+                                    <a href="#" data-lang="zh" class="active block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">中文</a>
+                                    <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">English</a>
+                                    <a href="#" data-lang="ja" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">日本語</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button class="nav-toggle text-gray-300 hover:text-white focus:outline-none focus:text-white transition-colors duration-300" id="navToggle">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden nav-links opacity-0 invisible transition-all duration-300 bg-dark-light/95 glass-effect">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="text-white hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="home">首页</a>
+                <a href="resume.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="resume">简历</a>
+                <a href="projects.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="projects">项目</a>
+                <a href="github.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="github">GitHub</a>
+                
+                <!-- 移动端语言切换 -->
+                <div class="px-3 py-2">
+                    <div class="text-gray-400 text-sm mb-2">语言 / Language</div>
+                    <div class="flex space-x-4">
+                        <a href="#" data-lang="zh" class="active text-primary text-sm">中文</a>
+                        <a href="#" data-lang="en" class="text-gray-300 hover:text-primary text-sm transition-colors duration-200">English</a>
+                        <a href="#" data-lang="ja" class="text-gray-300 hover:text-primary text-sm transition-colors duration-200">日本語</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- 主要内容区域 - 英雄区块 -->
-    <main class="hero">
-        <canvas id="heroCanvas"></canvas>
-        <div class="hero-content">
-            <!-- 个人介绍 -->
-            <h1 data-i18n="hello">你好，我是杨尚卫 <span class="highlight">Sanuei</span></h1>
-            <!-- 行动按钮 -->
-            <div class="cta-buttons">
-                <a href="github.html" class="btn primary" data-i18n="view-github">GitHub</a>
-                <a href="resume.html" class="btn secondary" data-i18n="view-resume">我的简历</a>
+    <main class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style="animation-delay: -1.5s;"></div>
+        </div>
+        
+        <!-- 英雄内容 -->
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            <!-- 头像区域 -->
+            <div class="mb-8">
+                <div class="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-4xl font-bold animate-glow">
+                    S
+                </div>
             </div>
-
+            
+            <!-- 主标题 -->
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight" data-i18n="hello">
+                你好，我是 <span class="gradient-text">Sanuei</span>
+            </h1>
+            
+            <!-- 副标题 -->
+            <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed" data-i18n="role">
+                全栈开发工程师 | 开源爱好者 | 摄影爱好者
+            </p>
+            
+            <!-- 简介 -->
+            <p class="text-lg text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+                专注于现代 Web 开发技术，擅长 Java/SpringBoot 后端开发和前端技术栈。
+                热爱开源项目，积极拥抱 AI 技术，致力于创造优秀的用户体验。
+            </p>
+            
+            <!-- 行动按钮 -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <a href="github.html" class="group bg-primary hover:bg-primary/80 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-primary/25 flex items-center" data-i18n="view-github">
+                    <i class="fab fa-github mr-2 text-lg"></i>
+                    查看 GitHub
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
+                <a href="resume.html" class="group border-2 border-primary/50 hover:border-primary text-white hover:bg-primary/10 px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center" data-i18n="view-resume">
+                    <i class="fas fa-file-alt mr-2"></i>
+                    我的简历
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
+            </div>
+            
+            <!-- 技能标签 -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <span class="bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-medium border border-primary/30">Java</span>
+                <span class="bg-secondary/20 text-secondary px-4 py-2 rounded-full text-sm font-medium border border-secondary/30">SpringBoot</span>
+                <span class="bg-accent/20 text-accent px-4 py-2 rounded-full text-sm font-medium border border-accent/30">React</span>
+                <span class="bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full text-sm font-medium border border-emerald-500/30">Vue.js</span>
+                <span class="bg-orange-500/20 text-orange-400 px-4 py-2 rounded-full text-sm font-medium border border-orange-500/30">JavaScript</span>
+            </div>
+            
+            <!-- 滚动提示 -->
+            <div class="animate-bounce">
+                <i class="fas fa-chevron-down text-gray-400 text-2xl"></i>
+            </div>
         </div>
     </main>
 
     <!-- 页脚区域 -->
-    <footer>
-        <!-- 社交媒体链接 -->
-        <div class="social-links">
-            <a href="https://github.com/Sanuei" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-            <a href="https://www.youtube.com/@sonicyann" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com/sonic_yann/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-            <a href="https://twitter.com/yngshngwi6" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+    <footer class="bg-dark-light/50 border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <!-- 社交媒体链接 -->
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="https://github.com/Sanuei" target="_blank" rel="noopener" class="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@sonicyann" target="_blank" rel="noopener" class="text-gray-400 hover:text-red-500 transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/sonic_yann/" target="_blank" rel="noopener" class="text-gray-400 hover:text-pink-500 transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="https://twitter.com/yngshngwi6" target="_blank" rel="noopener" class="text-gray-400 hover:text-blue-400 transition-colors duration-300 transform hover:scale-110">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                </div>
+                
+                <!-- 版权信息 -->
+                <p class="text-gray-400 text-sm">
+                    &copy; 2024 Sanuei. All rights reserved.
+                </p>
+            </div>
         </div>
-        <!-- 版权信息 -->
-        <p>&copy; 2024 Sanuei. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript 文件引入 -->
     <script src="js/main.js"></script>
     <script src="js/hero-animation.js"></script>
     <script src="js/i18n.js"></script>
+    
+    <!-- Tailwind 特定的交互脚本 -->
+    <script>
+        // 语言下拉菜单交互
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageMenu = document.querySelector('.language-menu');
+            
+            if (languageDropdown && languageMenu) {
+                languageDropdown.addEventListener('mouseenter', function() {
+                    languageMenu.classList.remove('opacity-0', 'invisible');
+                    languageMenu.classList.add('opacity-100', 'visible');
+                });
+                
+                languageDropdown.addEventListener('mouseleave', function() {
+                    languageMenu.classList.add('opacity-0', 'invisible');
+                    languageMenu.classList.remove('opacity-100', 'visible');
+                });
+            }
+        });
+    </script>
 </body>
-</html> 
+</html>
