@@ -4,7 +4,7 @@
     <!-- 基本元数据 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>项目履历 - Sanuei</title>
+    <title>Open Source Projects - Sanuei Yang</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,15 +13,22 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6366f1',
-                        secondary: '#8b5cf6',
-                        accent: '#06b6d4',
-                        dark: '#0f172a',
-                        'dark-light': '#1e293b',
+                        'gray-950': '#0a0a0a',
+                        'gray-925': '#111111',
+                        'gray-900': '#1a1a1a',
+                        'gray-875': '#1f1f1f',
+                        'gray-850': '#262626',
+                        'accent': '#3b82f6',
+                        'accent-light': '#60a5fa',
                     },
                     fontFamily: {
-                        'display': ['Orbitron', 'sans-serif'],
-                        'body': ['Inter', 'sans-serif'],
+                        'display': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'Monaco', 'Consolas', 'monospace'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'scale-up': 'scaleUp 0.3s ease-out',
                     }
                 }
             }
@@ -31,362 +38,728 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes scaleUp {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
         .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-card {
+            background: rgba(31, 31, 31, 0.6);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-        }
-        .project-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
+        
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1);
+        }
+        
+        .language-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-dark via-slate-900 to-dark-light text-white font-body">
-    <!-- 导航栏 -->
-    <nav class="fixed top-0 w-full z-50 bg-dark/80 glass-effect border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+<body class="bg-gray-950 text-white font-display antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-950/80 glass-effect border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="index.html" class="text-2xl font-display font-bold gradient-text hover:scale-105 transition-transform duration-300">
-                        SONIC_YANN
+                    <a href="index.html" class="text-xl font-semibold text-gradient hover:scale-105 transition-transform duration-300">
+                        SANUEI.DEV
                     </a>
                 </div>
                 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="home">首页</a>
-                        <a href="resume.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="resume">简历</a>
-                        <a href="projects.html" class="text-white hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="projects">项目</a>
-                        <a href="github.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="github">GitHub</a>
-                        
-                        <div class="relative language-dropdown">
-                            <button class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium language-btn">
-                                <i class="fas fa-globe mr-1"></i>
-                                <i class="fas fa-chevron-down text-xs"></i>
-                            </button>
-                            <div class="language-menu absolute right-0 mt-2 w-32 bg-dark-light rounded-md shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible transition-all duration-300">
-                                <div class="py-1">
-                                    <a href="#" data-lang="zh" class="active block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">中文</a>
-                                    <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">English</a>
-                                    <a href="#" data-lang="ja" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">日本語</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-400 hover:text-accent transition-colors duration-300 py-2">Home</a>
+                    <a href="resume.html" class="nav-link text-gray-400 hover:text-accent transition-colors duration-300 py-2">Resume</a>
+                    <a href="projects.html" class="nav-link text-white hover:text-accent transition-colors duration-300 py-2">Projects</a>
                 </div>
                 
+                <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button class="nav-toggle text-gray-300 hover:text-white focus:outline-none focus:text-white transition-colors duration-300" id="navToggle">
+                    <button class="mobile-menu-btn text-gray-400 hover:text-white focus:outline-none" aria-label="Toggle mobile menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
         
-        <div class="md:hidden nav-links opacity-0 invisible transition-all duration-300 bg-dark-light/95 glass-effect">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="home">首页</a>
-                <a href="resume.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="resume">简历</a>
-                <a href="projects.html" class="text-white hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="projects">项目</a>
-                <a href="github.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="github">GitHub</a>
-                
-                <div class="px-3 py-2">
-                    <div class="text-gray-400 text-sm mb-2">语言 / Language</div>
-                    <div class="flex space-x-4">
-                        <a href="#" data-lang="zh" class="active text-primary text-sm">中文</a>
-                        <a href="#" data-lang="en" class="text-gray-300 hover:text-primary text-sm transition-colors duration-200">English</a>
-                        <a href="#" data-lang="ja" class="text-gray-300 hover:text-primary text-sm transition-colors duration-200">日本語</a>
-        </div>
-                </div>
+        <!-- Mobile Navigation -->
+        <div class="mobile-menu hidden md:hidden bg-gray-925/95 glass-effect border-t border-gray-800/50">
+            <div class="px-6 py-4 space-y-3">
+                <a href="index.html" class="block text-gray-400 hover:text-accent transition-colors duration-300">Home</a>
+                <a href="resume.html" class="block text-gray-400 hover:text-accent transition-colors duration-300">Resume</a>
+                <a href="projects.html" class="block text-white hover:text-accent transition-colors duration-300">Projects</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-20 pb-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- 页面标题 -->
-            <div class="text-center mb-12">
-                <h1 class="text-4xl sm:text-5xl font-display font-bold gradient-text mb-4" data-i18n="projects">项目履历</h1>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
-                <p class="text-gray-400 mt-6 text-lg max-w-2xl mx-auto">
-                    以下是我参与开发的主要项目，涵盖了 Web 开发、系统集成和培训等多个领域
+    <!-- Main Content -->
+    <main class="pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16 animate-fade-in">
+                <h1 class="text-4xl lg:text-5xl font-bold mb-4">
+                    <span class="text-gradient">Open Source Projects</span>
+                </h1>
+                <div class="w-20 h-1 bg-gradient-to-r from-accent to-blue-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                    A collection of my open source contributions and personal projects. 
+                    Building tools and solutions that make a difference in the developer community.
                 </p>
             </div>
 
-            <!-- 项目统计 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center">
-                    <div class="text-3xl font-bold text-primary mb-2">3+</div>
-                    <div class="text-gray-400">完成项目</div>
-                </div>
-                <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center">
-                    <div class="text-3xl font-bold text-secondary mb-2">2+</div>
-                    <div class="text-gray-400">年开发经验</div>
-                </div>
-                <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center">
-                    <div class="text-3xl font-bold text-accent mb-2">10+</div>
-                    <div class="text-gray-400">技术栈</div>
-                </div>
-            </div>
-
-            <!-- 项目展示 -->
-            <div class="space-y-8">
-                <!-- 项目1：e-staffing系统 -->
-                <div class="project-card bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-xl">
-                    <div class="md:flex">
-                        <!-- 项目图片 -->
-                        <div class="md:w-1/3">
-                            <div class="h-64 md:h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                                <div class="text-center">
-                                    <i class="fas fa-users text-6xl text-primary mb-4"></i>
-                                    <div class="text-lg font-semibold">人材派遣管理</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 项目内容 -->
-                        <div class="md:w-2/3 p-8">
-                            <div class="flex flex-col sm:flex-row justify-between items-start mb-4">
-                                <h3 class="text-2xl font-bold mb-2 sm:mb-0" data-i18n="project1-title">e-staffing人材派遣管理システム</h3>
-                                <span class="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm border border-primary/30">
-                                    2023.12 - 2024.01
-                                </span>
-                            </div>
-                            
-                            <p class="text-gray-300 mb-6 leading-relaxed" data-i18n="project1-desc">
-                                複数の派遣会社とのやり取りを一元化する、派遣管理システム。
-                                效率化された人材派遣業務管理を実現し、複数の派遣会社との連携を統合的に管理できるシステムを開発しました。
-                            </p>
-                            
-                            <!-- 技术栈 -->
-                            <div class="mb-6">
-                                <h4 class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">技术栈</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm border border-red-500/30">Java</span>
-                                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm border border-green-500/30">SpringBoot</span>
-                                    <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm border border-blue-500/30">MyBatis</span>
-                                    <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm border border-yellow-500/30">jQuery</span>
-                                    <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm border border-purple-500/30">MySQL</span>
-                                </div>
-                        </div>
-                            
-                            <!-- 技术详情 -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <span class="text-gray-400" data-i18n="environment">環境：</span>
-                                    <span class="text-gray-300">Windows / MySQL</span>
-                        </div>
-                                <div>
-                                    <span class="text-gray-400" data-i18n="tools">ツール：</span>
-                                    <span class="text-gray-300">Eclipse, Git, VSCode</span>
-                        </div>
+            <!-- Stats Overview -->
+            <div class="stats-grid mb-16 animate-slide-up" style="animation-delay: 0.1s;">
+                <div class="project-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-code-branch text-accent text-2xl"></i>
                     </div>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold mb-2">5</h3>
+                    <p class="text-gray-400">Repositories</p>
                 </div>
-
-            <!-- 项目2：通信方式选定工具 -->
-                <div class="project-card bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-xl">
-                    <div class="md:flex">
-                        <div class="md:w-1/3">
-                            <div class="h-64 md:h-full bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
-                                <div class="text-center">
-                                    <i class="fas fa-broadcast-tower text-6xl text-accent mb-4"></i>
-                                    <div class="text-lg font-semibold">通信工具</div>
-                </div>
-                </div>
-                        </div>
-                        
-                        <div class="md:w-2/3 p-8">
-                            <div class="flex flex-col sm:flex-row justify-between items-start mb-4">
-                                <h3 class="text-2xl font-bold mb-2 sm:mb-0" data-i18n="project2-title">通信方式選定ツール（電柱）</h3>
-                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-sm border border-accent/30">
-                                    2024.02 - 2024.06
-                                </span>
-                            </div>
-                            
-                            <p class="text-gray-300 mb-6 leading-relaxed" data-i18n="project2-desc">
-                                StrutsからSpringbootに移行するプロジェクト。
-                                レガシーシステムの現代化を図り、保守性と拡張性を大幅に向上させました。
-                            </p>
-                            
-                            <div class="mb-6">
-                                <h4 class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">技术栈</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm border border-red-500/30">Java</span>
-                                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm border border-green-500/30">SpringBoot</span>
-                                    <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm border border-orange-500/30">JSP</span>
-                                    <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm border border-yellow-500/30">jQuery</span>
-                                    <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm border border-purple-500/30">MySQL</span>
-                                </div>
-                            </div>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <span class="text-gray-400" data-i18n="environment">環境：</span>
-                                    <span class="text-gray-300">Windows / MySQL</span>
-                                </div>
-                                <div>
-                                    <span class="text-gray-400" data-i18n="tools">ツール：</span>
-                                    <span class="text-gray-300">Eclipse</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 项目3：Java培训项目 -->
-                <div class="project-card bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-xl">
-                    <div class="md:flex">
-                        <div class="md:w-1/3">
-                            <div class="h-64 md:h-full bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center">
-                                <div class="text-center">
-                                    <i class="fas fa-graduation-cap text-6xl text-secondary mb-4"></i>
-                                    <div class="text-lg font-semibold">Java培训</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="md:w-2/3 p-8">
-                            <div class="flex flex-col sm:flex-row justify-between items-start mb-4">
-                                <h3 class="text-2xl font-bold mb-2 sm:mb-0" data-i18n="project3-title">Javaプログラミングスクール</h3>
-                                <span class="bg-secondary/20 text-secondary px-3 py-1 rounded-full text-sm border border-secondary/30">
-                                    2023.10 - 2023.11
-                                </span>
-                            </div>
-                            
-                            <p class="text-gray-300 mb-6 leading-relaxed" data-i18n="project3-desc">
-                                Javaの基本からWebサイト構築、フレームワークまでの総合的な研修。
-                                現代的なWeb開発技術を体系的に学習し、実践的なスキルを身につけました。
-                            </p>
-                            
-                            <div class="mb-6">
-                                <h4 class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">技术栈</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm border border-red-500/30">Java</span>
-                                    <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-sm border border-emerald-500/30">Vue.js</span>
-                                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm border border-green-500/30">SpringBoot</span>
-                                    <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm border border-blue-500/30">MyBatis</span>
-                                    <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm border border-purple-500/30">MySQL</span>
-                                </div>
-                            </div>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                <div>
-                                    <span class="text-gray-400" data-i18n="environment">環境：</span>
-                                    <span class="text-gray-300">Windows / MySQL</span>
-                                </div>
-                                <div>
-                                    <span class="text-gray-400" data-i18n="tools">ツール：</span>
-                                    <span class="text-gray-300">Eclipse, SVN, Git, VSCode</span>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 技能总结 -->
-            <div class="mt-16 bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-                <h2 class="text-2xl font-bold mb-6 text-center">
-                    <span class="gradient-text">项目中使用的核心技术</span>
-                </h2>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fab fa-java text-red-400 text-2xl"></i>
-                        </div>
-                        <div class="text-sm font-medium">Java</div>
-                        <div class="text-xs text-gray-400">后端核心</div>
+                <div class="project-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-yellow-400 text-2xl"></i>
                     </div>
-                    
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fas fa-leaf text-green-400 text-2xl"></i>
-                        </div>
-                        <div class="text-sm font-medium">Spring</div>
-                        <div class="text-xs text-gray-400">框架</div>
-                        </div>
-                    
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fas fa-database text-blue-400 text-2xl"></i>
-                        </div>
-                        <div class="text-sm font-medium">MySQL</div>
-                        <div class="text-xs text-gray-400">数据库</div>
+                    <h3 class="text-2xl font-bold mb-2">18</h3>
+                    <p class="text-gray-400">Stars Earned</p>
+                </div>
+                
+                <div class="project-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-code-commit text-green-400 text-2xl"></i>
                     </div>
-                    
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fab fa-vuejs text-emerald-400 text-2xl"></i>
-                        </div>
-                        <div class="text-sm font-medium">Vue.js</div>
-                        <div class="text-xs text-gray-400">前端框架</div>
+                    <h3 class="text-2xl font-bold mb-2">100+</h3>
+                    <p class="text-gray-400">Commits</p>
+                </div>
+                
+                <div class="project-card rounded-2xl p-6 text-center">
+                    <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-purple-400 text-2xl"></i>
                     </div>
+                    <h3 class="text-2xl font-bold mb-2">1</h3>
+                    <p class="text-gray-400">Followers</p>
+                </div>
+            </div>
+
+            <!-- Featured Projects -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 animate-slide-up" style="animation-delay: 0.2s;">Featured Projects</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Project 1: Personal Resume Website -->
+                    <div class="project-card rounded-2xl p-8 animate-scale-up" style="animation-delay: 0.3s;">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-globe text-accent text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">sanuei-resume</h3>
+                                    <p class="text-gray-400 text-sm">Personal Portfolio Website</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs">Public</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            A modern, responsive personal portfolio website built with HTML5, CSS3, and JavaScript. 
+                            Features dark theme, smooth animations, and mobile-first design approach.
+                        </p>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4 text-sm text-gray-400">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-blue-500 mr-2"></span>
+                                    CSS
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star mr-1"></i>
+                                    2
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-code-branch mr-1"></i>
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <a href="https://github.com/sanuei/sanuei-resume" target="_blank" rel="noopener" 
+                               class="flex-1 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fab fa-github mr-2"></i>View Code
+                            </a>
+                            <a href="https://sanuei.github.io/sanuei-resume" target="_blank" rel="noopener"
+                               class="flex-1 bg-accent hover:bg-accent-light text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: YouTube Planner -->
+                    <div class="project-card rounded-2xl p-8 animate-scale-up" style="animation-delay: 0.4s;">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fab fa-youtube text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">YoutubePlanner</h3>
+                                    <p class="text-gray-400 text-sm">Video Script Tool</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs">Public</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            A tool to write YouTube video scripts with TypeScript support. 
+                            Helps content creators plan and structure their video content efficiently.
+                        </p>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4 text-sm text-gray-400">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-blue-500 mr-2"></span>
+                                    TypeScript
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star mr-1"></i>
+                                    0
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-code-branch mr-1"></i>
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <a href="https://github.com/sanuei/YoutubePlanner" target="_blank" rel="noopener"
+                               class="flex-1 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fab fa-github mr-2"></i>View Code
+                            </a>
+                            <a href="https://youtubeplanner.duckdns.org/" target="_blank" rel="noopener"
+                               class="flex-1 bg-accent hover:bg-accent-light text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: AWS CLF02 Menu -->
+                    <div class="project-card rounded-2xl p-8 animate-scale-up" style="animation-delay: 0.5s;">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fab fa-aws text-orange-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">AWS-CLF02-menu</h3>
+                                    <p class="text-gray-400 text-sm">AWS Services Guide</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs">Public</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            AWS服务一览 - Comprehensive AWS services overview and reference guide. 
+                            A helpful resource for learning and understanding various AWS services and their use cases.
+                        </p>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4 text-sm text-gray-400">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-orange-500 mr-2"></span>
+                                    HTML
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star mr-1"></i>
+                                    0
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-code-branch mr-1"></i>
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <a href="https://github.com/sanuei/AWS-CLF02-menu" target="_blank" rel="noopener"
+                               class="flex-1 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fab fa-github mr-2"></i>View Code
+                            </a>
+                            <a href="https://github.com/sanuei/AWS-CLF02-menu/deployments/github-pages" target="_blank" rel="noopener"
+                               class="flex-1 bg-accent hover:bg-accent-light text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fas fa-external-link-alt mr-2"></i>View Guide
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Sample Japanese Design Document -->
+                    <div class="project-card rounded-2xl p-8 animate-scale-up" style="animation-delay: 0.6s;">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-file-alt text-purple-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">Sample-Japanese-Design-Document</h3>
+                                    <p class="text-gray-400 text-sm">AI Video Script Tool</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs">Public</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            An AI-driven video script auto-generation tool based on mind maps, with a modern-designed document viewer 
+                            to display the complete system design documentation.
+                        </p>
+                        
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4 text-sm text-gray-400">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-orange-500 mr-2"></span>
+                                    HTML
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star mr-1"></i>
+                                    0
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-code-branch mr-1"></i>
+                                    0
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-3">
+                            <a href="https://github.com/sanuei/Sample-Japanese-Design-Document" target="_blank" rel="noopener"
+                               class="flex-1 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fab fa-github mr-2"></i>View Code
+                            </a>
+                            <a href="https://sanuei.github.io/Sample-Japanese-Design-Document/" target="_blank" rel="noopener"
+                               class="flex-1 bg-accent hover:bg-accent-light text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300 text-center">
+                                <i class="fas fa-book mr-2"></i>Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technologies Used -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 animate-slide-up" style="animation-delay: 0.7s;">Technologies & Tools</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Languages -->
+                    <div class="project-card rounded-2xl p-6 animate-slide-up" style="animation-delay: 0.8s;">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-code text-accent mr-3"></i>
+                            Languages
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-orange-500 mr-3"></span>
+                                    <span class="text-gray-300">HTML</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">90%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-blue-500 mr-3"></span>
+                                    <span class="text-gray-300">CSS</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">85%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-yellow-500 mr-3"></span>
+                                    <span class="text-gray-300">JavaScript</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">75%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-blue-600 mr-3"></span>
+                                    <span class="text-gray-300">TypeScript</span>
+                                </div>
+                                <span class="text-gray-500 text-sm">60%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frameworks & Libraries -->
+                    <div class="project-card rounded-2xl p-6 animate-slide-up" style="animation-delay: 0.9s;">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-layer-group text-accent mr-3"></i>
+                            Frameworks & Libraries
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">Tailwind CSS</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">Bootstrap</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">Node.js</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">Express.js</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">React</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">Vue.js</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Platforms -->
+                    <div class="project-card rounded-2xl p-6 animate-slide-up" style="animation-delay: 1s;">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-tools text-accent mr-3"></i>
+                            Tools & Platforms
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">Git</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">GitHub</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">GitHub Pages</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">VS Code</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">DuckDNS</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">AWS</span>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700">Claude AI</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Projects -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 animate-slide-up" style="animation-delay: 1.1s;">Other Projects</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project: sonic-space-personal-website -->
+                    <div class="project-card rounded-2xl p-6 animate-scale-up" style="animation-delay: 1.2s;">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-rocket text-purple-400 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-1">sonic-space-personal-website</h3>
+                                    <p class="text-gray-400 text-xs">Personal Space</p>
+                                </div>
+                            </div>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs">Public</span>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                            Personal space website with creative design and interactive elements.
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3 text-xs text-gray-400">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-orange-500 mr-1"></span>
+                                    HTML
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star mr-1"></i>
+                                    0
+                                </div>
+                            </div>
+                            <a href="https://github.com/sanuei/sonic-space-personal-website" target="_blank" rel="noopener"
+                               class="text-accent hover:text-accent-light text-sm">
+                                <i class="fab fa-github mr-1"></i>View
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Future Project Placeholder 1 -->
+                    <div class="project-card rounded-2xl p-6 animate-scale-up opacity-60" style="animation-delay: 1.3s;">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gray-600/20 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-plus text-gray-500 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-1">Coming Soon</h3>
+                                    <p class="text-gray-400 text-xs">Future Project</p>
+                                </div>
+                            </div>
+                            <span class="bg-gray-800 text-gray-500 px-2 py-1 rounded text-xs">TBD</span>
+                        </div>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                            New exciting project in development. Stay tuned for updates!
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3 text-xs text-gray-500">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-gray-500 mr-1"></span>
+                                    TBD
+                                </div>
+                            </div>
+                            <span class="text-gray-500 text-sm">
+                                <i class="fas fa-clock mr-1"></i>Soon
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Future Project Placeholder 2 -->
+                    <div class="project-card rounded-2xl p-6 animate-scale-up opacity-60" style="animation-delay: 1.4s;">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gray-600/20 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-lightbulb text-gray-500 text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-1">Ideas in Progress</h3>
+                                    <p class="text-gray-400 text-xs">Concept Phase</p>
+                                </div>
+                            </div>
+                            <span class="bg-gray-800 text-gray-500 px-2 py-1 rounded text-xs">Planning</span>
+                        </div>
+                        
+                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                            Exploring new technologies and innovative solutions for upcoming projects.
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3 text-xs text-gray-500">
+                                <div class="flex items-center">
+                                    <span class="language-dot bg-gray-500 mr-1"></span>
+                                    Various
+                                </div>
+                            </div>
+                            <span class="text-gray-500 text-sm">
+                                <i class="fas fa-cog mr-1"></i>Planning
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Statistics -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 animate-slide-up" style="animation-delay: 1.5s;">Development Journey</h2>
+                
+                <div class="project-card rounded-2xl p-8 animate-slide-up" style="animation-delay: 1.6s;">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Timeline -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fas fa-timeline text-accent mr-3"></i>
+                                Project Timeline
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-accent rounded-full mr-4"></div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">2024 Q4</p>
+                                        <p class="text-gray-400 text-sm">Started personal portfolio development</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-400 rounded-full mr-4"></div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">2024 Q4</p>
+                                        <p class="text-gray-400 text-sm">Launched YoutubePlanner tool</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-yellow-400 rounded-full mr-4"></div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">2025 Q1</p>
+                                        <p class="text-gray-400 text-sm">AWS learning documentation project</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-purple-400 rounded-full mr-4"></div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">2025 Q1</p>
+                                        <p class="text-gray-400 text-sm">AI-powered design documentation</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Achievements -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fas fa-trophy text-accent mr-3"></i>
+                                Key Achievements
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                        <i class="fas fa-code text-blue-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">Clean Code Practice</p>
+                                        <p class="text-gray-400 text-sm">Maintained high code quality across all projects</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                        <i class="fas fa-mobile-alt text-green-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">Responsive Design</p>
+                                        <p class="text-gray-400 text-sm">All projects optimized for mobile devices</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                        <i class="fas fa-rocket text-purple-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">Live Deployments</p>
+                                        <p class="text-gray-400 text-sm">Successfully deployed multiple live applications</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-yellow-500/20 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                        <i class="fas fa-brain text-yellow-400 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-300 font-medium">AI Integration</p>
+                                        <p class="text-gray-400 text-sm">Explored AI-powered development tools</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <div class="text-center animate-slide-up" style="animation-delay: 1.7s;">
+                <h2 class="text-2xl font-bold mb-4">Want to collaborate?</h2>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    I'm always interested in working on exciting projects and learning new technologies. 
+                    Let's build something amazing together!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://github.com/sanuei" target="_blank" rel="noopener"
+                       class="group bg-accent hover:bg-accent-light text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 inline-flex items-center justify-center">
+                        <i class="fab fa-github mr-2"></i>
+                        Follow on GitHub
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                    </a>
+                    <a href="mailto:sanuei.yann@gmail.com" class="group border border-gray-700 hover:border-accent text-gray-300 hover:text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Get In Touch
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                    </a>
+                    <a href="resume.html" class="group border border-gray-700 hover:border-accent text-gray-300 hover:text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center">
+                        <i class="fas fa-user mr-2"></i>
+                        View Resume
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- 页脚 -->
-    <footer class="bg-dark-light/50 border-t border-white/10 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/50 py-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="https://github.com/Sanuei" target="_blank" rel="noopener" class="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-github text-2xl"></i>
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2024 Sanuei Yang. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="mailto:sanuei.yann@gmail.com" class="text-gray-500 hover:text-accent transition-colors duration-300">
+                        <i class="fas fa-envelope"></i>
                     </a>
-                    <a href="https://www.youtube.com/@sonicyann" target="_blank" rel="noopener" class="text-gray-400 hover:text-red-500 transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-youtube text-2xl"></i>
+                    <a href="#" class="text-gray-500 hover:text-accent transition-colors duration-300">
+                        <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://www.instagram.com/sonic_yann/" target="_blank" rel="noopener" class="text-gray-400 hover:text-pink-500 transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-instagram text-2xl"></i>
-                    </a>
-                    <a href="https://twitter.com/yngshngwi6" target="_blank" rel="noopener" class="text-gray-400 hover:text-blue-400 transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-twitter text-2xl"></i>
+                    <a href="#" class="text-gray-500 hover:text-accent transition-colors duration-300">
+                        <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
-                <p class="text-gray-400 text-sm">&copy; 2024 Sanuei. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/projects.js"></script>
-    <script src="js/i18n.js"></script>
-    
     <script>
-        // 语言下拉菜单交互
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Add loading animation for project cards
         document.addEventListener('DOMContentLoaded', function() {
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageMenu = document.querySelector('.language-menu');
-            
-            if (languageDropdown && languageMenu) {
-                languageDropdown.addEventListener('mouseenter', function() {
-                    languageMenu.classList.remove('opacity-0', 'invisible');
-                    languageMenu.classList.add('opacity-100', 'visible');
-                });
-                
-                languageDropdown.addEventListener('mouseleave', function() {
-                    languageMenu.classList.add('opacity-0', 'invisible');
-                    languageMenu.classList.remove('opacity-100', 'visible');
-                });
-            }
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${0.1 * index}s`;
+            });
         });
     </script>
 </body>

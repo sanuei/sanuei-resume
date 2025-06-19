@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人简历 - Sanuei</title>
+    <title>Resume - Sanuei Yang</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,15 +12,21 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6366f1',
-                        secondary: '#8b5cf6',
-                        accent: '#06b6d4',
-                        dark: '#0f172a',
-                        'dark-light': '#1e293b',
+                        'gray-950': '#0a0a0a',
+                        'gray-925': '#111111',
+                        'gray-900': '#1a1a1a',
+                        'gray-875': '#1f1f1f',
+                        'gray-850': '#262626',
+                        'accent': '#3b82f6',
+                        'accent-light': '#60a5fa',
                     },
                     fontFamily: {
-                        'display': ['Orbitron', 'sans-serif'],
-                        'body': ['Inter', 'sans-serif'],
+                        'display': ['Inter', 'system-ui', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'Monaco', 'Consolas', 'monospace'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
                     }
                 }
             }
@@ -30,351 +36,392 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        .gradient-text {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
         .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-card {
+            background: rgba(31, 31, 31, 0.6);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: #3b82f6;
+            border-radius: 50%;
+            border: 3px solid #1f1f1f;
+        }
+        
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 24px;
+            bottom: -24px;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, transparent);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-dark via-slate-900 to-dark-light text-white font-body">
-    <!-- 导航栏 -->
-    <nav class="fixed top-0 w-full z-50 bg-dark/80 glass-effect border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+
+<body class="bg-gray-950 text-white font-display antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-950/80 glass-effect border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="index.html" class="text-2xl font-display font-bold gradient-text hover:scale-105 transition-transform duration-300">
-                        SONIC_YANN
+                    <a href="index.html" class="text-xl font-semibold text-gradient hover:scale-105 transition-transform duration-300">
+                        SANUEI.DEV
                     </a>
                 </div>
                 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="index.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="home">首页</a>
-                        <a href="resume.html" class="text-white hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="resume">简历</a>
-                        <a href="projects.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="projects">项目</a>
-                        <a href="github.html" class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium" data-i18n="github">GitHub</a>
-                        
-                        <div class="relative language-dropdown">
-                            <button class="text-gray-300 hover:text-primary transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium language-btn">
-                                <i class="fas fa-globe mr-1"></i>
-                                <i class="fas fa-chevron-down text-xs"></i>
-                            </button>
-                            <div class="language-menu absolute right-0 mt-2 w-32 bg-dark-light rounded-md shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible transition-all duration-300">
-                                <div class="py-1">
-                                    <a href="#" data-lang="zh" class="active block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">中文</a>
-                                    <a href="#" data-lang="en" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">English</a>
-                                    <a href="#" data-lang="ja" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary hover:text-white transition-colors duration-200">日本語</a>
-                                </div>
-                            </div>
-                    </div>
-                    </div>
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-400 hover:text-accent transition-colors duration-300 py-2">Home</a>
+                    <a href="resume.html" class="nav-link text-white hover:text-accent transition-colors duration-300 py-2">Resume</a>
+                    <a href="projects.html" class="nav-link text-gray-400 hover:text-accent transition-colors duration-300 py-2">Projects</a>
                 </div>
                 
+                <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button class="nav-toggle text-gray-300 hover:text-white focus:outline-none focus:text-white transition-colors duration-300" id="navToggle">
+                    <button class="mobile-menu-btn text-gray-400 hover:text-white focus:outline-none" aria-label="Toggle mobile menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
         
-        <div class="md:hidden nav-links opacity-0 invisible transition-all duration-300 bg-dark-light/95 glass-effect">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="home">首页</a>
-                <a href="resume.html" class="text-white hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="resume">简历</a>
-                <a href="projects.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="projects">项目</a>
-                <a href="github.html" class="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="github">GitHub</a>
-                
-                <div class="px-3 py-2">
-                    <div class="text-gray-400 text-sm mb-2">语言 / Language</div>
-                    <div class="flex space-x-4">
-                        <a href="#" data-lang="zh" class="active text-primary text-sm">中文</a>
-                        <a href="#" data-lang="en" class="text-gray-300 hover:text-primary text-sm transition-colors duration-200">English</a>
-                        <a href="#" data-lang="ja" class="text-gray-300 hover:text-primary text-sm transition-colors duration-200">日本語</a>
-                    </div>
-                </div>
+        <!-- Mobile Navigation -->
+        <div class="mobile-menu hidden md:hidden bg-gray-925/95 glass-effect border-t border-gray-800/50">
+            <div class="px-6 py-4 space-y-3">
+                <a href="index.html" class="block text-gray-400 hover:text-accent transition-colors duration-300">Home</a>
+                <a href="resume.html" class="block text-white hover:text-accent transition-colors duration-300">Resume</a>
+                <a href="projects.html" class="block text-gray-400 hover:text-accent transition-colors duration-300">Projects</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-20 pb-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- 页面标题 -->
-            <div class="text-center mb-12">
-                <h1 class="text-4xl sm:text-5xl font-display font-bold gradient-text mb-4" data-i18n="resume-title">履历書</h1>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full"></div>
+    <!-- Main Content -->
+    <main class="pt-24 pb-16">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16 animate-fade-in">
+                <h1 class="text-4xl lg:text-5xl font-bold mb-4">
+                    <span class="text-gradient">Resume</span>
+                </h1>
+                <div class="w-20 h-1 bg-gradient-to-r from-accent to-blue-500 mx-auto rounded-full"></div>
             </div>
 
-            <!-- 个人信息卡片 -->
-            <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8 shadow-xl">
+            <!-- Personal Info -->
+            <section class="section-card rounded-2xl p-8 mb-8 animate-slide-up">
                 <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8">
-                    <!-- 头像 -->
+                    <!-- Avatar -->
                     <div class="flex-shrink-0">
-                        <div class="w-32 h-32 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-4xl font-bold">
-                            S
-                        </div>
+                        <img src="myphoto.png" alt="Sanuei Yang Profile Photo" 
+                             class="w-32 h-32 rounded-full object-cover border-4 border-accent/20 shadow-lg shadow-accent/20 hover:shadow-accent/30 transition-all duration-300 hover:scale-105">
                     </div>
                     
-                    <!-- 基本信息 -->
+                    <!-- Basic Info -->
                     <div class="flex-1 text-center lg:text-left">
-                        <div class="mb-6">
-                            <div class="text-3xl sm:text-4xl font-bold mb-2">
-                                <span data-i18n="surname">楊</span>
-                                <span data-i18n="firstname" class="ml-2">尚衛</span>
-                            </div>
-                            <div class="text-lg text-gray-400">
-                                <span data-i18n="surname-phonetic">ヤン</span>
-                                <span data-i18n="firstname-phonetic" class="ml-2">サンウエイ</span>
-                            </div>
-                        </div>
+                        <h2 class="text-3xl font-bold mb-2">楊 尚衛 / Yang Sanuei</h2>
+                        <p class="text-xl text-gray-400 mb-6">Full Stack Developer</p>
                         
-                        <!-- 联系信息 -->
+                        <!-- Contact Info -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-300">
                             <div class="flex items-center justify-center lg:justify-start">
-                                <i class="fas fa-envelope text-primary mr-3"></i>
+                                <i class="fas fa-envelope text-accent mr-3"></i>
                                 <span>sanuei.yann@gmail.com</span>
                             </div>
                             <div class="flex items-center justify-center lg:justify-start">
-                                <i class="fas fa-phone text-primary mr-3"></i>
-                                <span>080xxxx-xxx</span>
+                                <i class="fas fa-phone text-accent mr-3"></i>
+                                <span>080-xxxx-xxxx</span>
                             </div>
                             <div class="flex items-center justify-center lg:justify-start">
-                                <i class="fab fa-weixin text-primary mr-3"></i>
-                                <span>080xxxx8323</span>
+                                <i class="fas fa-map-marker-alt text-accent mr-3"></i>
+                                <span>Tokyo, Japan</span>
                             </div>
                             <div class="flex items-center justify-center lg:justify-start">
-                                <i class="fas fa-map-marker-alt text-primary mr-3"></i>
-                                <span data-i18n="address">東京都</span>
+                                <i class="fab fa-github text-accent mr-3"></i>
+                                <span>github.com/Sanuei</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- 学历背景 -->
-            <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8 shadow-xl">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-graduation-cap text-primary mr-3"></i>
-                    <span data-i18n="education">学历背景</span>
-                </h2>
-                
-                <div class="space-y-6">
-                    <div class="flex flex-col sm:flex-row gap-4 p-6 bg-dark/30 rounded-xl border border-white/5">
-                        <div class="flex-shrink-0">
-                            <div class="bg-primary/20 text-primary px-4 py-2 rounded-lg text-sm font-medium border border-primary/30" data-i18n="study-period">
-                                2022.10 - 2023.10
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-semibold mb-2" data-i18n="school-1">大原日本語学院</h3>
-                            <p class="text-gray-400" data-i18n="major-1">日语学习</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 p-6 bg-dark/30 rounded-xl border border-white/5">
-                        <div class="flex-shrink-0">
-                            <div class="bg-secondary/20 text-secondary px-4 py-2 rounded-lg text-sm font-medium border border-secondary/30">
-                                2016.09 - 2020.07
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-semibold mb-2" data-i18n="school-2">南京艺术学院</h3>
-                            <p class="text-gray-400" data-i18n="major-2">数字媒体艺术</p>
-                </div>
-                    </div>
-                </div>
-            </div>
+            <!-- About -->
+            <section class="section-card rounded-2xl p-8 mb-8 animate-slide-up" style="animation-delay: 0.1s;">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-user text-accent mr-3"></i>
+                    About
+                </h3>
+                <p class="text-gray-300 leading-relaxed">
+                    Passionate full stack developer with expertise in modern web technologies. 
+                    Experienced in building scalable applications using Java/Spring Boot for backend 
+                    and React/Vue.js for frontend. Strong advocate for clean code, user experience, 
+                    and continuous learning. Currently based in Tokyo, actively contributing to 
+                    open source projects and exploring AI technologies.
+                </p>
+            </section>
 
-            <!-- 工作经历 -->
-            <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8 shadow-xl">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-briefcase text-primary mr-3"></i>
-                    <span data-i18n="workExperience">工作经历</span>
-                </h2>
-                
-                <div class="space-y-6">
-                    <div class="flex flex-col sm:flex-row gap-4 p-6 bg-dark/30 rounded-xl border border-white/5">
-                        <div class="flex-shrink-0">
-                            <div class="bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-lg text-sm font-medium border border-emerald-500/30">
-                                2024.09 - <span data-i18n="present">现在</span>
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-semibold mb-2" data-i18n="company-1">(株)名川ネットワーク</h3>
-                            <p class="text-gray-400" data-i18n="position-1">Web开发工程师</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 p-6 bg-dark/30 rounded-xl border border-white/5">
-                        <div class="flex-shrink-0">
-                            <div class="bg-accent/20 text-accent px-4 py-2 rounded-lg text-sm font-medium border border-accent/30">
-                                2023.10 - 2024.08
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-semibold mb-2" data-i18n="company-2">(株)Great Navigation</h3>
-                            <p class="text-gray-400" data-i18n="position-2">Web开发工程师</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 p-6 bg-dark/30 rounded-xl border border-white/5">
-                        <div class="flex-shrink-0">
-                            <div class="bg-orange-500/20 text-orange-400 px-4 py-2 rounded-lg text-sm font-medium border border-orange-500/30">
-                                2020.10 - 2021.10
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-semibold mb-2" data-i18n="company-3">南京德基广场有限公司</h3>
-                            <p class="text-gray-400" data-i18n="position-3">媒体设计师</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 技术技能 -->
-            <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8 shadow-xl">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-code text-primary mr-3"></i>
-                    <span data-i18n="skills">技术技能</span>
-                </h2>
+            <!-- Skills -->
+            <section class="section-card rounded-2xl p-8 mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-code text-accent mr-3"></i>
+                    Technical Skills
+                </h3>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <h3 class="text-lg font-semibold text-primary" data-i18n="backend-skills">后端开发</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm border border-red-500/30">JAVA</span>
-                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm border border-green-500/30">SpringBoot</span>
-                            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm border border-blue-500/30">Struts</span>
-                            <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm border border-yellow-500/30">MySQL</span>
-                            <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm border border-purple-500/30">Oracle</span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <h3 class="text-lg font-semibold text-secondary" data-i18n="frontend-skills">前端开发</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm border border-cyan-500/30">React</span>
-                            <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-sm border border-emerald-500/30">Vue</span>
-                            <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm border border-orange-500/30">HTML</span>
-                            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm border border-blue-500/30">CSS</span>
-                            <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm border border-yellow-500/30">JavaScript</span>
-                        </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <h3 class="text-lg font-semibold text-accent" data-i18n="ai-tools">AI工具</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm border border-primary/30">ChatGPT</span>
-                            <span class="bg-secondary/20 text-secondary px-3 py-1 rounded-full text-sm border border-secondary/30">Cursor</span>
-                            <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-sm border border-accent/30">Notion AI</span>
-                </div>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <h3 class="text-lg font-semibold text-pink-400" data-i18n="design-skills">设计技能</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full text-sm border border-pink-500/30" data-i18n="graphic-design">平面设计</span>
-                            <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-sm border border-indigo-500/30" data-i18n="video-editing">视频编辑</span>
-                            <span class="bg-teal-500/20 text-teal-400 px-3 py-1 rounded-full text-sm border border-teal-500/30" data-i18n="photography">摄影</span>
-                </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 资格证书 -->
-            <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8 shadow-xl">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-certificate text-primary mr-3"></i>
-                    <span data-i18n="certificates">资格证书</span>
-                </h2>
-                
-                <div class="flex items-center p-6 bg-dark/30 rounded-xl border border-white/5">
-                    <div class="flex-shrink-0 mr-4">
-                        <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center">
-                            <i class="fas fa-award text-primary text-2xl"></i>
-                        </div>
-                    </div>
+                    <!-- Backend -->
                     <div>
-                        <h3 class="text-xl font-semibold mb-1">JLPT N2</h3>
-                        <p class="text-gray-400" data-i18n="jlpt-n2">日本語能力試験N2</p>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-300">Backend</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">Java</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">Spring Boot</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">MyBatis</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">MySQL</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">PostgreSQL</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Frontend -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-300">Frontend</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">React</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">Vue.js</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">TypeScript</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">Tailwind CSS</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">jQuery</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Tools -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-300">Tools & Others</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">Git</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">Docker</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">AWS</span>
+                            <span class="bg-gray-875 text-gray-300 px-3 py-1 rounded-full text-sm font-mono border border-gray-800">Linux</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Languages -->
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-gray-300">Languages</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Chinese (Native)</span>
+                                <div class="flex space-x-1">
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Japanese (N2)</span>
+                                <div class="flex space-x-1">
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-gray-700 rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">English (Professional)</span>
+                                <div class="flex space-x-1">
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-accent rounded-full"></div>
+                                    <div class="w-3 h-3 bg-gray-700 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- 自我介绍 -->
-            <div class="bg-dark-light/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-xl">
-                <h2 class="text-2xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-user text-primary mr-3"></i>
-                    <span data-i18n="selfIntro">自我介绍</span>
-                </h2>
+            <!-- Experience -->
+            <section class="section-card rounded-2xl p-8 mb-8 animate-slide-up" style="animation-delay: 0.3s;">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-briefcase text-accent mr-3"></i>
+                    Work Experience
+                </h3>
                 
-                <div class="space-y-4 text-gray-300 leading-relaxed">
-                    <p data-i18n="intro-p1">
-                        作为全栈开发工程师，我精通从Java/SpringBoot后端开发到HTML/CSS/JavaScript前端开发的全面技术栈。
-                    </p>
-                    <p data-i18n="intro-p2">
-                        对AI技术有浓厚兴趣，积极运用ChatGPT和GitHub Copilot等最新AI工具，提高开发效率和代码质量。
-                    </p>
+                <div class="relative pl-8">
+                    <div class="timeline-line absolute left-0 top-0 bottom-0"></div>
+                    
+                    <!-- Current Position -->
+                    <div class="timeline-item relative mb-8">
+                        <div class="bg-gray-875 rounded-xl p-6 border border-gray-800">
+                            <div class="flex flex-col sm:flex-row justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-1">Full Stack Developer</h4>
+                                    <p class="text-accent font-medium">名川ネットワーク株式会社</p>
+                                </div>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-sm border border-accent/30 mt-2 sm:mt-0">
+                                    2023.12 - Present
+                                </span>
+                            </div>
+                            <ul class="text-gray-300 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-accent mr-2 mt-1 text-sm"></i>
+                                    Developed and maintained e-staffing management system using Java/Spring Boot
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-accent mr-2 mt-1 text-sm"></i>
+                                    Built responsive frontend interfaces with jQuery and modern CSS frameworks
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-accent mr-2 mt-1 text-sm"></i>
+                                    Optimized database queries and improved system performance by 30%
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-chevron-right text-accent mr-2 mt-1 text-sm"></i>
+                                    Collaborated with cross-functional teams to deliver projects on time
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </section>
+
+            <!-- Education -->
+            <section class="section-card rounded-2xl p-8 mb-8 animate-slide-up" style="animation-delay: 0.4s;">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-graduation-cap text-accent mr-3"></i>
+                    Education
+                </h3>
+                
+                <div class="space-y-6">
+                    <!-- Language School -->
+                    <div class="bg-gray-875 rounded-xl p-6 border border-gray-800">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-1">Japanese Language Studies</h4>
+                                <p class="text-accent font-medium">大原日本語学院</p>
+                            </div>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700 mt-2 sm:mt-0">
+                                2022.10 - 2023.10
+                            </span>
+                        </div>
+                        <p class="text-gray-300">
+                            Intensive Japanese language program focusing on business communication and cultural understanding.
+                        </p>
+                    </div>
+                    
+                    <!-- University -->
+                    <div class="bg-gray-875 rounded-xl p-6 border border-gray-800">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-1">Bachelor's Degree in Digital Media Arts</h4>
+                                <p class="text-accent font-medium">南京艺术学院 (Nanjing University of the Arts)</p>
+                            </div>
+                            <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-700 mt-2 sm:mt-0">
+                                2016.09 - 2020.07
+                            </span>
+                        </div>
+                        <p class="text-gray-300">
+                            Studied digital media arts with focus on interactive design, programming, and multimedia technologies.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download Resume -->
+            <div class="text-center animate-slide-up" style="animation-delay: 0.5s;">
+                <a href="#" class="group bg-accent hover:bg-accent-light text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-accent/25 inline-flex items-center">
+                    <i class="fas fa-download mr-2"></i>
+                    Download PDF Resume
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
             </div>
-            </div>
+        </div>
     </main>
 
-    <!-- 页脚 -->
-    <footer class="bg-dark-light/50 border-t border-white/10 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/50 py-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="https://github.com/Sanuei" target="_blank" rel="noopener" class="text-gray-400 hover:text-primary transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-github text-2xl"></i>
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2024 Sanuei Yang. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="mailto:sanuei.yann@gmail.com" class="text-gray-500 hover:text-accent transition-colors duration-300">
+                        <i class="fas fa-envelope"></i>
                     </a>
-                    <a href="https://www.youtube.com/@sonicyann" target="_blank" rel="noopener" class="text-gray-400 hover:text-red-500 transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-youtube text-2xl"></i>
+                    <a href="#" class="text-gray-500 hover:text-accent transition-colors duration-300">
+                        <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://www.instagram.com/sonic_yann/" target="_blank" rel="noopener" class="text-gray-400 hover:text-pink-500 transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-instagram text-2xl"></i>
-                    </a>
-                    <a href="https://twitter.com/yngshngwi6" target="_blank" rel="noopener" class="text-gray-400 hover:text-blue-400 transition-colors duration-300 transform hover:scale-110">
-                        <i class="fab fa-twitter text-2xl"></i>
+                    <a href="#" class="text-gray-500 hover:text-accent transition-colors duration-300">
+                        <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
-                <p class="text-gray-400 text-sm">&copy; 2024 Sanuei. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/i18n.js"></script>
-    
     <script>
-        // 语言下拉菜单交互
-        document.addEventListener('DOMContentLoaded', function() {
-            const languageDropdown = document.querySelector('.language-dropdown');
-            const languageMenu = document.querySelector('.language-menu');
-            
-            if (languageDropdown && languageMenu) {
-                languageDropdown.addEventListener('mouseenter', function() {
-                    languageMenu.classList.remove('opacity-0', 'invisible');
-                    languageMenu.classList.add('opacity-100', 'visible');
-                });
-                
-                languageDropdown.addEventListener('mouseleave', function() {
-                    languageMenu.classList.add('opacity-0', 'invisible');
-                    languageMenu.classList.remove('opacity-100', 'visible');
-                });
-            }
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
         });
     </script>
 </body>
